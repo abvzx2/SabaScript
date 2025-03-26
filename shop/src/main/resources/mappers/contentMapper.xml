@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.shop.mappers.contentMapper">
+<select id="content" resultType="com.my.shop.vo.ContentVO">
+<![CDATA[
+select
+contentNum, contentName, contentThumbnail, contentDes
+from content
+where contentNum = #{contentNum}
+]]>
+</select>
+</mapper>

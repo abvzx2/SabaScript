@@ -17,7 +17,8 @@
                            <h2 class="fw-bold">お帰りなさい!</h2>
                            <p class="text-muted">Welcome Back!</p>
                         </div>
-                                <form method="post" action="/member/login" class="needs-validation" novalidate>
+                        
+                                <form method="post" action="/member/signin" class="needs-validation" novalidate>
                                     <div class="mb-3">
                                         <input
                                         type="text"

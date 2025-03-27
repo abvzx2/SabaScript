@@ -12,8 +12,15 @@ public class GoodsVO {
 	private String gdsDes;
 	private String gdsImg;
 	private String gdsThumbImg;
+	private String gdsUrl;
 	
 	
+	public String getGdsUrl() {
+		return gdsUrl;
+	}
+	public void setGdsUrl(String gdsUrl) {
+		this.gdsUrl = gdsUrl;
+	}
 	public String getGdsThumbImg() {
 		return gdsThumbImg;
 	}

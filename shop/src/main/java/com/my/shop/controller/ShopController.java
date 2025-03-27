@@ -39,16 +39,16 @@ public class ShopController {
 
 
 	
-	//移댄뀒怨좊━蹂� �긽�뭹由ъ뒪�듃
+	//카테고리蹂� �긽�뭹리스트
 	@GetMapping("/list")
 	public void getList(@RequestParam("c") int cateCode, @RequestParam("l") int level, Model model)throws Exception{
-		logger.info("�냼鍮꾩옄 �럹�씠吏� 吏꾩엯");
+		logger.info("�냼鍮꾩옄 �럹�씠吏� 진입");
 		List<GoodsViewVO> list = null;
 		list = service.list(cateCode, level);
 		model.addAttribute("list",list);
 	}
 	
-	//�긽�뭹議고쉶
+	//�긽�뭹조회
 	@GetMapping("/view")
 	public void getView(@RequestParam("n") int gdsNum, Model model) throws Exception{
 		logger.info("get view");
@@ -66,16 +66,16 @@ public class ShopController {
 		//濡쒓렇�씤 �꽭�뀡(�쎒�뿉�꽌 �궗�슜�옄媛� 媛�吏��뒗 uri)
 		MemberVO member = (MemberVO)session.getAttribute("member");
 		reply.setUserId(member.getUserId());
-		//�꽌鍮꾩뒪 濡쒖쭅
+		//서비스 로직
 		//public void registReply(ReplyVO reply)throws Exception;
 		service.registReply(reply);//湲곗궗�궛�뾽湲곗궗�뿉 �젙�쓽�븯�뒗 愿��젏�뿉�꽌�뒗 �겢�옒�뒪�� �겢�옒�뒪�궗�씠瑜� �뿰寃고븯�뒗 媛�援� �뿭�븷�쓣 �븯�뒗寃�
 		//�옄諛붾쭔�뿉 愿��젏�쑝濡쒕뒗 諛붾뵒媛� �뾾�뒗 援ы쁽泥�  �몢�쓬踰뺤튃 �떒�쐞�뀒�뒪�듃 �넻�빀 �떆�씤
 	}
-//�뙎湲�由ъ뒪�듃 濡쒖쭅�뿉�꽌 由ы꽩�쓣 �궗�슜�븯�뒗 3紐� (list,read, 0=�삤瑜�, 1=�꽦怨�, -1=�꽕�듃�썙�겕 �삤瑜�(�겕由ъ뿉�씠�듃�� �뵜由ы듃)
+//�뙎湲�리스트 로직�뿉�꽌 由ы꽩�쓣 �궗�슜�븯�뒗 3紐� (list,read, 0=�삤瑜�, 1=�꽦怨�, -1=�꽕�듃�썙�겕 �삤瑜�(�겕由ъ뿉�씠�듃�� �뵜由ы듃)
 	@ResponseBody
 	@GetMapping(value="/view/replyList")
 public List<ReplyListVO> getReplyList(@RequestParam("n") int gdsNum) throws Exception{
-		logger.info("由ы뵆 由ъ뒪�듃 吏꾩엯");
+		logger.info("리플 리스트 진입");
 List<ReplyListVO> reply = service.replyList(gdsNum);
 return reply;
 	}
@@ -95,7 +95,7 @@ String userId = service.idCheck(reply.getRepNum()); //�쁽�옱�젒�냽�
 if(member.getUserId().equals(userId)) {//濡쒓렇�씤�븳 �븘�씠�뵒媛� �옉�꽦�븳 �븘�씠�뵒�� 媛숇떎硫�
 	
 	reply.setUserId(member.getUserId());//reply�뿉 userId���옣
-	service.deleteReply(reply);//�꽌鍮꾩뒪�쓽 硫붿꽌�뱶 �떎�뻾
+	service.deleteReply(reply);//서비스 메서드 �떎�뻾
 	
 	result = 1;//�꽦怨�
 }
@@ -116,13 +116,13 @@ String userId = service.idCheck(reply.getRepNum());
 if(member.getUserId().equals(userId)) {//濡쒓렇�씤�븳 �븘�씠�뵒媛� �옉�꽦�븳 �븘�씠�뵒�� 媛숇떎硫�
 	
 	reply.setUserId(member.getUserId());//reply�뿉 userId���옣
-	service.modifyReply(reply);//�꽌鍮꾩뒪�쓽 硫붿꽌�뱶 �떎�뻾	
+	service.modifyReply(reply);//서비스 메서드 �떎�뻾	
 	result = 1;//�꽦怨�
 }
 return result;		
 	}
 	
-	//移댄듃�떞湲� RDBMS ORM
+	//카트 추가 RDBMS ORM
 	@ResponseBody
 	@PostMapping("/view/addCart")
 	public void addCart(CartVO cart, HttpSession session)throws Exception{
@@ -132,7 +132,7 @@ return result;
 		service.addCart(cart);
 	}
 	
-	//移댄듃紐⑸줉
+	//카트 목록
 	@GetMapping("/cartList")
 public void getCartList(HttpSession session, Model model) throws Exception {
 		

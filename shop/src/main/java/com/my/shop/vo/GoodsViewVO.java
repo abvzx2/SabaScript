@@ -5,7 +5,13 @@ import java.util.Date;
 public class GoodsViewVO {
 	
 	private int gdsNum, gdsPrice, gdsStock;
-	private String gdsName, cateCode, gdsDes, gdsImg, cateCodeRef, cateName, gdsThumbImg;
+	private String gdsName, cateCode, gdsDes, gdsImg, cateCodeRef, cateName, gdsThumbImg, gdsUrl;
+	public String getGdsUrl() {
+		return gdsUrl;
+	}
+	public void setGdsUrl(String gdsUrl) {
+		this.gdsUrl = gdsUrl;
+	}
 	private Date gdsDate;
 	
 	public int getGdsNum() {

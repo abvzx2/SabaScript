@@ -14,9 +14,9 @@ start with cateCodeRef is null connect by prior cateCode = cateCoderef
 </select>
 <insert id="register" parameterType="com.my.shop.vo.GoodsVO">
 <![CDATA[
-insert into tbl_goods(gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsThumbImg)
+insert into tbl_goods(gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsThumbImg, gdsUrl)
 values
-(seq_gdsNum.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes}, #{gdsImg}, #{gdsThumbImg})
+(seq_gdsNum.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes}, #{gdsImg}, #{gdsThumbImg}, #{gdsUrl})
 ]]>
 </insert>
 <!-- 상품목록 -->
@@ -32,7 +32,7 @@ order by gdsNum desc
 <![CDATA[
 select
 g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
-g.gdsImg, g.gdsThumbImg
+g.gdsImg, g.gdsThumbImg, g.gdsUrl
 from tbl_goods g
 inner join goods_category c
 on g.cateCode = c.cateCode            

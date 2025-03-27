@@ -33,9 +33,9 @@
 <input type="text" id="gdsName" name="gdsName" class="form-control w-90" required/>
 </div>
 
-<div class="input-group mt-5">
-<label class="form-label text-white w-10">상품가격</label>
-<input type="text" id="gdsPrice" name="gdsPrice" class="form-control w-90" required/>
+<div class="input-group mt-5"><!-- gdsPrice->gdsUrl 수정 -->
+<label class="form-label text-white w-10">동영상 URL 주소</label>
+<input type="text" id="gdsUrl" name="gdsUrl" class="form-control w-90" required/>
 </div>
 
 <div class="input-group mt-5"><!-- 실패하는 경우 수량에는 숫자가 아닌 문자열을 사용할수 없게 만듬 10 11많음 -->

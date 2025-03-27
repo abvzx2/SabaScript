@@ -28,26 +28,26 @@
 									<li class="">
 									<button type="button">리뷰(0)</button>
 									</li><li class="">
-									<button type="button">프로그램 소개</button>
+									<button type="button">영상소개</button>
 									</li><li class="">
-									<button type="button">공식이미지</button>
+									<button type="button">상세설명</button>
 									</li>
 								</ul>
 							</div>
 								
 						
-						
+						<!-- 컨텐츠 -->
 						<div class="my-3 content-item">
-							<a href="https://www.youtube.com/watch?v=HyU3XL2F9GE&t=1s">
-						<div class="">
-							<img src="https://img.youtube.com/vi/HyU3XL2F9GE/0.jpg" alt="이미지" loading="lazy">
-						</div>
-						<div class="info text-white my-3">
-							<p class="content-title subject">Python超入門コース 合併版｜Pythonの超基本的な部分をたった1時間で学べます【プログラミング初心者向け入門講座】</p>
-							<p class="subject">예고편</p>
-							<span class="date">2020.3.20</span>
-						</div>
-						</a>
+							<a href="${view.gdsUrl}">
+								<div class="content-thumbnail">
+									<img src="${view.gdsThumbImg}" alt="${view.gdsName}" loading="lazy">
+								</div>
+								
+								<div class="info text-white my-3">
+									<p class="content-title subject">${view.gdsName}</p>
+									<span class="date">2020.3.20</span>
+								</div>
+							</a>
 						</div>
 						
 						<!-- 장바구니에 담기 -->

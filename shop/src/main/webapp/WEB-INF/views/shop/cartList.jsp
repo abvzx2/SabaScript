@@ -53,12 +53,12 @@
 							<img src="${cartList.gdsThumbImg}" class="img-thumbnail w-25"/>
 							
 							<div class="gdsInfo w-75 mx-3">
-<p class="p-3">
+<!-- <p class="p-3">
 	<div>상품명<span class="mx-3">${cartList.gdsName}</span></div>
 	<div>개당 가격<span class="mx-3"><fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice}" /> 원</span></div>
 	<div>구입 수량<span class="mx-3">${cartList.cartStock} 개</span></div>
 	<div>최종 가격<span class="mx-3"><fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice * cartList.cartStock}" /> 원</span></div>
-</p>
+</p> -->
 						</div>
 						</div>
 
@@ -101,7 +101,7 @@
 					
 					</c:forEach>
 				</ul>
-			
+			<!-- 
 			<div class="listResult">
 				<div class="sum my-3">
 					총 합계 : <fmt:formatNumber pattern="###,###,###" value="${sum}" />원
@@ -143,7 +143,7 @@
 						<label for="userAddr3">2차 주소</label>
 						<input type="text" name="userAddr3" id="userAddr3" required="required" />
 					</div>
-					-->
+					
 					<div class="inputArea">
 					
 
@@ -156,7 +156,7 @@
 							<input type="text" name="userAddr1" id="sample2_address" placeholder="주소" class="form-control">
 							<input type="text" name="userAddr2" id="sample2_detailAddress" placeholder="상세주소" class="form-control my-3">
 							<input type="text" name="userAddr3" id="sample2_extraAddress" placeholder="참고항목" class="form-control">
-						</p>
+						</p> -->
 						
 						<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
 						<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">

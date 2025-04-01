@@ -23,22 +23,22 @@ public class ShopServiceImpl implements ShopService {
 	private ShopDAO dao;
 	
 	@Override//諛쏆� �뜲�씠�꽣瑜� 湲곗��쑝濡� 遺꾨쪟
-	public List<GoodsViewVO> list(int cateCode, int level) throws Exception {
-int cateCodeRef = 0;//移댄뀒怨좊━ 李몄“ 肄붾뱶
+	public List<GoodsViewVO> list(int contents_category_code, int level) throws Exception {
+int catecodeRef = 0;//移댄뀒怨좊━ 李몄“ 肄붾뱶
 /*1李� 遺꾨쪟�� 2李⑤텇瑜� 瑜� 留뚯빟 �씠�씪硫�*/	
 if(level == 1) {//1李� 遺꾨쪟
-	cateCodeRef = cateCode;
-	return dao.list(cateCode, cateCodeRef);
+	catecodeRef = contents_category_code;
+	return dao.list(contents_category_code, catecodeRef);
 }else {//2李� 遺꾨쪟
-	return dao.list(cateCode);
+	return dao.list(contents_category_code);
 }
 
 	}
 
 
 	@Override//�긽�뭹議고쉶
-	public GoodsViewVO goodsView(int gdsNum) throws Exception {
-		return dao.goodsView(gdsNum);
+	public GoodsViewVO goodsView(int contents_id) throws Exception {
+		return dao.goodsView(contents_id);
 	}
 
 
@@ -49,8 +49,8 @@ if(level == 1) {//1李� 遺꾨쪟
 
 
 	@Override//�뙎湲�由ъ뒪�듃
-	public List<ReplyListVO> replyList(int gdsNum) throws Exception {
-		return dao.replyList(gdsNum);
+	public List<ReplyListVO> replyList(int contents_id) throws Exception {
+		return dao.replyList(contents_id);
 	}
 
 
@@ -116,7 +116,24 @@ if(level == 1) {//1李� 遺꾨쪟
 		return dao.orderView(order);
 	}
 
+	@Override//좋아요-리스트
+	public List<Integer> getLikedGoodsNums(String userId) throws Exception {
+		return dao.getLikedGoodsNums(userId);
+	}
 	
+	@Override//좋아요-뷰
+	public boolean toggleLike(String userId, int contents_id) throws Exception {
+		int check = dao.checkLike(userId, contents_id);
+		if(check == 0) {
+			dao.insertLike(userId, contents_id);
+			dao.incrementLikes(contents_id);
+			return true;
+		}else {
+			dao.deleteLike(userId, contents_id);
+			dao.decrementLikes(contents_id);
+			return false;
+		}
+	}
 	
 	
 	

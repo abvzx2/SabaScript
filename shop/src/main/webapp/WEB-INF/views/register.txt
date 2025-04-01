@@ -23,7 +23,7 @@
 </select>
 <div class="w-5"></div>
 <label class="form-label text-white">2차 분류</label>
-<select class="form-select category2" name="cateCode">
+<select class="form-select category2" name="contents_category_code">
 <option value="">
 전체
 </option>
@@ -32,7 +32,7 @@
 
 <div class="input-group mt-5">
 <label class="form-label text-white w-10">상품명</label>
-<input type="text" id="gdsName" name="gdsName" class="form-control w-90" required="required"/>
+<input type="text" id="contents_title" name="contents_title" class="form-control w-90" required="required"/>
 </div>
 
 <div class="input-group mt-5">
@@ -47,7 +47,7 @@
 
 <div class="input-group mt-5">
 <label class="form-label text-white w-10">상품소개</label>
-<textarea rows="5" id="gdsDes" name="gdsDes" class="form-control w-90" required>내용을 적어주세요</textarea>
+<textarea rows="5" id="contents_description" name="contents_description" class="form-control w-90" required>내용을 적어주세요</textarea>
 <!-- ck에디터 장착할 수 있도록 스크립트 처리 -->
 <script>
 // 버전을 탄다 -> 버전에 따라 작성법이 다름
@@ -58,13 +58,13 @@ var ckeditor_config = {
 		shiftEnterMode : CKEDITOR.ENTER_P,
 		filebrowserUploadUrl : "/admin/goods/ckUpload"
 };
-CKEDITOR.replace("gdsDes", ckeditor_config);
+CKEDITOR.replace("contents_description", ckeditor_config);
 </script>
 </div>
 
 <div class="input-group mt-5"><!-- 실제 파일을 올리는 곳 -->
 <label class="form-label text-white w-10">이미지</label>
-<input type="file" id="gdsImg" name="file" class="form-control w-90"/>
+<input type="file" id="contents_poster_img" name="file" class="form-control w-90"/>
 </div>
 
 <!-- 아래는 올린 이미지를 확인 -->
@@ -73,12 +73,12 @@ CKEDITOR.replace("gdsDes", ckeditor_config);
 </div>
 <div class="d-flex">
 <div class="text-white">원본 이미지</div>
-<img src="${goods.gdsImg}" style="width:100px;"/>
+<img src="${goods.contents_poster_img}" style="width:100px;"/>
 <div class="text-white">썸네일</div>
-<img src="${goods.gdsThumbImg}" style="width:50px;"/>
+<img src="${goods.contents_thumb_img}" style="width:50px;"/>
 </div>
 <script>
-%('#gdsImg').change(function(){ // 이미지 미리보기 처리 html요소에 이벤트 리스너를 연결
+%('#contents_poster_img').change(function(){ // 이미지 미리보기 처리 html요소에 이벤트 리스너를 연결
 	// 사용자가 이 입력을 사용하여 이미지를 선택하면 change 이벤트가 트리거 된다
 	if(this.files && this.files[0]){ // 배열이 채워졌는지(사용자가 파일을 선택했는지를 확인)
 	// files[0]선택된 첫 번째 파일에 엑세스 파일입력은 여러 파일을 선택할 수 있기 때문에
@@ -121,10 +121,10 @@ var cate1Obj = new Object();
 
 // 1차 분류 셀렉트 박스에 삽입할 데이터 준비
 for(var i = 0; i < jsonData.length; i++){
-	// jsonData 배열을 순회하면서 level이 "1"인 항목을 찾아 cate1Obj에 cateCode와 cateName을 저장하고 이를 cate1Arr 배열에 추가합니다
+	// jsonData 배열을 순회하면서 level이 "1"인 항목을 찾아 cate1Obj에 contents_category_code와 cateName을 저장하고 이를 cate1Arr 배열에 추가합니다
 	if(jsonData[i].level == "1"){
 		cate1Obj = new Object(); // 초기화
-		cate1Obj.cateCode = jsonData[i].cateCode;
+		cate1Obj.contents_category_code = jsonData[i].contents_category_code;
 		cate1Obj.cateName = jsonData[i].cateName;
 		cate1Arr.push(cate1Obj);
 	}
@@ -133,7 +133,7 @@ for(var i = 0; i < jsonData.length; i++){
 var cate1Select = $("select.category1") // 선택된 카테고리, 예를 들어 100이라고 가정했을 때
 
 for(var i=0; i < cate1Arr.length; i++){ // 만약 100, 200, 300, 400
-	cate1Select.append("<option value='"+ cate1Arr[i].cateCode +"'>" + cate1Arr[i].cateName + "</option>");
+	cate1Select.append("<option value='"+ cate1Arr[i].contents_category_code +"'>" + cate1Arr[i].cateName + "</option>");
 	
 
 // 비워져있는 optiontag에 value를 넣어줌
@@ -152,9 +152,9 @@ $(document).on("change", "select.category1", function(){
 	for(var i = 0; i <jsonData.length; i++){
 	if(jsonData[i].level == "2"){
 		cate2Obj = new Object(); // 초기화
-		cate2Obj.cateCode = jsonData[i].cateCode;
+		cate2Obj.contents_category_code = jsonData[i].contents_category_code;
 		cate2Obj.cateName = jsonData[i].cateName;
-		cate2Obj.cateCodeRef = jsonDate[i].cateCodeRef;
+		cate2Obj.catecodeRef = jsonDate[i].catecodeRef;
 		cate2Arr.push(cate2Obj);
 		}
 	}
@@ -166,8 +166,8 @@ $(document).on("change", "select.category1", function(){
 		cate2Select.append("<option value='" + selectVal+ "'>전체</option>");
 		
 		for(var i=0; i < cate2Arr.length; i++){
-			if(selectVar == cate2Arr[i].cateCodeRef){
-				cate2Select.append("<option value='" + cate2Arr[i].cateCode +"'>" + cate2Arr[i].cateCode + "</option>");
+			if(selectVar == cate2Arr[i].catecodeRef){
+				cate2Select.append("<option value='" + cate2Arr[i].contents_category_code +"'>" + cate2Arr[i].contents_category_code + "</option>");
 			}
 		}
 	});

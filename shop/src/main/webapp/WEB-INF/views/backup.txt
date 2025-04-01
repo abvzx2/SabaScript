@@ -104,27 +104,27 @@
 <div class="w-75 p-5">
 <h1 class="my-5">view</h1>
 <form role="form" method="post" autocomplete="off"><!-- jquery나 ajax일때는 method속성 form에 적지 말것 -->
-<input type="hidden" name="n" value="${goods.gdsNum}"/>
+<input type="hidden" name="n" value="${goods.contents_id}"/>
 <!-- 카테고리 -->
 <div class="input-group">
 <label class="form-label fw-bold text-white">1차 분류</label>
 <span class="ml-2 text-white">${goods.cateName}</span>
 <label class="form-label fw-bold text-white">2차 분류</label>
-<span class="ml-2 text-white">${goods.cateCode}</span>
+<span class="ml-2 text-white">${goods.contents_category_code}</span>
 </div>
 
 <div class="input-group">
    <label class="form-label w-25 fw-bold text-white">메인 이미지</label>
-   <img src="${goods.gdsImg}" class="w-75"/>
+   <img src="${goods.contents_poster_img}" class="w-75"/>
 </div>
 
 <div class="w-100 d-flex justify-content-center">
-	<img src="${goods.gdsImg}" class="w-50 img-thumbnail"/>
+	<img src="${goods.contents_poster_img}" class="w-50 img-thumbnail"/>
 </div>
 
 <div class="input-group">
    <label class="form-label w-25 fw-bold text-white">상품명</label>
-   <span class="w-75">${goods.gdsName}</span>
+   <span class="w-75">${goods.contents_title}</span>
 </div>
 
 <div class="input-group">
@@ -141,7 +141,7 @@
 
 <div class="input-group">
    <label class="form-label w-25 fw-bold text-white">상품소개</label>
-   <span class="w-75">${goods.gdsDes}</span>
+   <span class="w-75">${goods.contents_description}</span>
 </div>
 
 <div class="d-flex justify-content-end my-5">
@@ -180,62 +180,62 @@ adminMapper2025.3.5
 <select id="category" resultType="com.my.shop.vo.CategoryVO">
 <![CDATA[
 select
-level, cateName, cateCode, cateCodeRef
-from goods_category
-start with cateCodeRef is null connect by prior cateCode = cateCoderef
+level, cateName, contents_category_code, catecodeRef
+from tbl_category
+start with catecodeRef is null connect by prior contents_category_code = catecodeRef
 ]]>
 </select>
 <insert id="register" parameterType="com.my.shop.vo.GoodsVO">
 <![CDATA[
-insert into tbl_goods(gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsThumbImg)
+insert into tbl_contents(contents_id, contents_title, contents_category_code, gdsPrice, gdsStock, contents_description, contents_poster_img, contents_thumb_img)
 values
-(seq_gdsNum.nextval, #{gdsName}, #{cateCode}, #{gdsPrice}, #{gdsStock}, #{gdsDes}, #{gdsImg}, #{gdsThumbImg})
+(seq_contents_id.nextval, #{contents_title}, #{contents_category_code}, #{gdsPrice}, #{gdsStock}, #{contents_description}, #{contents_poster_img}, #{contents_thumb_img})
 ]]>
 </insert>
 <!-- 상품목록 -->
 <select id="goodslist" resultType="com.my.shop.vo.GoodsVO">
 <![CDATA[
 select
-gdsNum, gdsName, cateCode, gdsPrice, gdsStock, gdsDes, gdsImg, gdsThumbImg, gdsDate
-from tbl_goods
-order by gdsNum desc
+contents_id, contents_title, contents_category_code, gdsPrice, gdsStock, contents_description, contents_poster_img, contents_thumb_img, contents_created_at
+from tbl_contents
+order by contents_id desc
 ]]>
 </select>
 <select id="goodsView" resultType="com.my.shop.vo.GoodsViewVO">
 <![CDATA[
 select
-g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsImg, gdsDate,
-g.gdsImg, g.gdsThumbImg
-from tbl_goods g
-inner join goods_category c
-on g.cateCode = c.cateCode            
-where g.gdsNum = #{gdsNum}
+g.contents_id, g.contents_title, g.contents_category_code, c.catecodeRef, c.cateName, gdsPrice, gdsStock, contents_description, contents_poster_img, contents_created_at,
+g.contents_poster_img, g.contents_thumb_img
+from tbl_contents g
+inner join tbl_category c
+on g.contents_category_code = c.contents_category_code            
+where g.contents_id = #{contents_id}
 ]]>
 </select>
 <update id="goodsModify">
 <![CDATA[
-update tbl_goods
+update tbl_contents
 set
-gdsName = #{gdsName}, cateCode=#{cateCode}, gdsPrice = #{gdsPrice}, gdsStock=#{gdsStock}, gdsDes=#{gdsDes}, gdsImg=#{gdsImg}, gdsThumbImg=#{gdsThumbImg}
-where gdsNum = ${gdsNum}
+contents_title = #{contents_title}, contents_category_code=#{contents_category_code}, gdsPrice = #{gdsPrice}, gdsStock=#{gdsStock}, contents_description=#{contents_description}, contents_poster_img=#{contents_poster_img}, contents_thumb_img=#{contents_thumb_img}
+where contents_id = ${contents_id}
 ]]>
 </update>
 <delete id="goodsDelete">
 <![CDATA[
-delete tbl_goods where gdsNum = #{gdsNum}
+delete tbl_contents where contents_id = #{contents_id}
 ]]>
 </delete>
 <!-- 
 Join : 두개 이상의 테이블에서 관련 열을 기준으로 행을 결합할때 사용
 내부 조인[INNER JOIN] : 두 테이블에서 일치하는 값을 갖는 레코드를 선택
-on g.cateCode = c.cateCode g테이블과 c테이블의 값이 같을때 두테이블의 데이터를 결합
+on g.contents_category_code = c.contents_category_code g테이블과 c테이블의 값이 같을때 두테이블의 데이터를 결합
 
 왼쪽 조인[LEFT JOIN] : 왼쪽 테이블의 모든 레코드와 오른쪽 테이블에 일치하는 레코드를 리턴
 오른쪽 조인[RIGHT JOIN]: 오른쪽 테이블의 모든 레코드와 왼쪽 테이블에 일치하는 레코드를 리턴
 전체[FULL]:왼쪽 오른쪽 테이블 레코드에 일치하는 항목이 있을 경우 모든레코드 리턴
 셀프[self]:테이블 자체가 자체적으로 조인됩니다
 
-별칭 tbl_goods.gdsNum 간단한 별칭 g.gdsNum
+별칭 tbl_contents.contents_id 간단한 별칭 g.contents_id
 
 import numpy as np
 xpoint = numpy.array([0, 6])
@@ -257,6 +257,6 @@ xpoint = numpy.array([0, 6])
 
 </mapper>
 <!-- 
-start with cateCodeRef is null => 계층적구조에 시작점
-connect by prior cateCode = cateCoderef => 부모범주가 이전레벨(현재범주)와 일치하는지 재귀적으로 찾도록 지시
+start with catecodeRef is null => 계층적구조에 시작점
+connect by prior contents_category_code = catecodeRef => 부모범주가 이전레벨(현재범주)와 일치하는지 재귀적으로 찾도록 지시
  -->

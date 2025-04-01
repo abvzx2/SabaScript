@@ -41,8 +41,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override//view
-	public GoodsViewVO goodsView(int gdsNum) throws Exception {
-		return sql.selectOne(namespace + ".goodsView", gdsNum);
+	public GoodsViewVO goodsView(int contents_id) throws Exception {
+		return sql.selectOne(namespace + ".goodsView", contents_id);
 	}
 
 	@Override//modify
@@ -52,8 +52,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override//delete
-	public void goodsDelete(int gdsNum) throws Exception {
-		sql.delete(namespace + ".goodsDelete", gdsNum);
+	public void goodsDelete(int contents_id) throws Exception {
+		sql.delete(namespace + ".goodsDelete", contents_id);
 		
 	}
 

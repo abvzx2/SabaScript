@@ -16,10 +16,10 @@
    <title>=== SHOP ===</title>
    <script>
       function replyList(){
-         var gdsNum = ${view.gdsNum};
+         var contents_id = ${view.contents_id};
       
          //비동기식 데이터 요청
-         $.getJSON("/shop/view/replyList" + "?n=" + gdsNum, function(data){
+         $.getJSON("/shop/view/replyList" + "?n=" + contents_id, function(data){
             var str = "";//초기화
             $(data).each(function(){
                console.log(data);

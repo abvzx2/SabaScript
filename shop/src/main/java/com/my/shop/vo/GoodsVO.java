@@ -4,47 +4,47 @@ import java.util.Date;
 
 public class GoodsVO {
 
-	private int gdsNum;
-	private String gdsName;
-	private String cateCode; 
+	private int contents_id;
+	private String contents_title;
+	private String contents_category_code; 
 	private int gdsPrice;
 	private int gdsStock;
-	private String gdsDes;
-	private String gdsImg;
-	private String gdsThumbImg;
-	private String gdsUrl;
+	private String contents_description;
+	private String contents_poster_img;
+	private String contents_thumb_img;
+	private String contents_video_url;
 	
 	
-	public String getGdsUrl() {
-		return gdsUrl;
+	public String getcontents_video_url() {
+		return contents_video_url;
 	}
-	public void setGdsUrl(String gdsUrl) {
-		this.gdsUrl = gdsUrl;
+	public void setcontents_video_url(String contents_video_url) {
+		this.contents_video_url = contents_video_url;
 	}
-	public String getGdsThumbImg() {
-		return gdsThumbImg;
+	public String getcontents_thumb_img() {
+		return contents_thumb_img;
 	}
-	public void setGdsThumbImg(String gdsThumbImg) {
-		this.gdsThumbImg = gdsThumbImg;
+	public void setcontents_thumb_img(String contents_thumb_img) {
+		this.contents_thumb_img = contents_thumb_img;
 	}
-	private Date gdsDate;
-	public int getGdsNum() {
-		return gdsNum;
+	private Date contents_created_at;
+	public int getcontents_id() {
+		return contents_id;
 	}
-	public void setGdsNum(int gdsNum) {
-		this.gdsNum = gdsNum;
+	public void setcontents_id(int contents_id) {
+		this.contents_id = contents_id;
 	}
-	public String getGdsName() {
-		return gdsName;
+	public String getcontents_title() {
+		return contents_title;
 	}
-	public void setGdsName(String gdsName) {
-		this.gdsName = gdsName;
+	public void setcontents_title(String contents_title) {
+		this.contents_title = contents_title;
 	}
-	public String getCateCode() {
-		return cateCode;
+	public String getcontents_category_code() {
+		return contents_category_code;
 	}
-	public void setCateCode(String cateCode) {
-		this.cateCode = cateCode;
+	public void setcontents_category_code(String contents_category_code) {
+		this.contents_category_code = contents_category_code;
 	}
 	public int getGdsPrice() {
 		return gdsPrice;
@@ -58,23 +58,23 @@ public class GoodsVO {
 	public void setGdsStock(int gdsStock) {
 		this.gdsStock = gdsStock;
 	}
-	public String getGdsDes() {
-		return gdsDes;
+	public String getcontents_description() {
+		return contents_description;
 	}
-	public void setGdsDes(String gdsDes) {
-		this.gdsDes = gdsDes;
+	public void setcontents_description(String contents_description) {
+		this.contents_description = contents_description;
 	}
-	public String getGdsImg() {
-		return gdsImg;
+	public String getcontents_poster_img() {
+		return contents_poster_img;
 	}
-	public void setGdsImg(String gdsImg) {
-		this.gdsImg = gdsImg;
+	public void setcontents_poster_img(String contents_poster_img) {
+		this.contents_poster_img = contents_poster_img;
 	}
-	public Date getGdsDate() {
-		return gdsDate;
+	public Date getcontents_created_at() {
+		return contents_created_at;
 	}
-	public void setGdsDate(Date gdsDate) {
-		this.gdsDate = gdsDate;
+	public void setcontents_created_at(Date contents_created_at) {
+		this.contents_created_at = contents_created_at;
 	}
 	
 	

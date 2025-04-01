@@ -2,7 +2,9 @@ package com.my.shop.controller;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -39,23 +41,23 @@ public class ShopController {
 
 
 	
-	//카테고리蹂� �긽�뭹리스트
-	@GetMapping("/list")
-	public void getList(@RequestParam("c") int cateCode, @RequestParam("l") int level, Model model)throws Exception{
-		logger.info("�냼鍮꾩옄 �럹�씠吏� 진입");
-		List<GoodsViewVO> list = null;
-		list = service.list(cateCode, level);
-		model.addAttribute("list",list);
-	}
-	
-	//�긽�뭹조회
-	@GetMapping("/view")
-	public void getView(@RequestParam("n") int gdsNum, Model model) throws Exception{
-		logger.info("get view");
-		
-		GoodsViewVO view = service.goodsView(gdsNum);
-		model.addAttribute("view",view);
-	}
+//	//카테고리蹂� �긽�뭹리스트
+//	@GetMapping("/list")
+//	public void getList(@RequestParam("c") int contents_category_code, @RequestParam("l") int level, Model model)throws Exception{
+//		logger.info("�냼鍮꾩옄 �럹�씠吏� 진입");
+//		List<GoodsViewVO> list = null;
+//		list = service.list(contents_category_code, level);
+//		model.addAttribute("list",list);
+//	}
+//	
+//	//�긽�뭹조회
+//	@GetMapping("/view")
+//	public void getView(@RequestParam("n") int contents_id, Model model) throws Exception{
+//		logger.info("get view");
+//		
+//		GoodsViewVO view = service.goodsView(contents_id);
+//		model.addAttribute("view",view);
+//	}
 	
 	//�뙎湲��벐湲�
 	//酉곕�� �넻�빐 �젋�뜑留� �릺吏� �븡怨� �겢�씪�씠�뼵�듃�뿉寃� 吏곸젒�쟾�떖
@@ -74,9 +76,9 @@ public class ShopController {
 //�뙎湲�리스트 로직�뿉�꽌 由ы꽩�쓣 �궗�슜�븯�뒗 3紐� (list,read, 0=�삤瑜�, 1=�꽦怨�, -1=�꽕�듃�썙�겕 �삤瑜�(�겕由ъ뿉�씠�듃�� �뵜由ы듃)
 	@ResponseBody
 	@GetMapping(value="/view/replyList")
-public List<ReplyListVO> getReplyList(@RequestParam("n") int gdsNum) throws Exception{
+public List<ReplyListVO> getReplyList(@RequestParam("n") int contents_id) throws Exception{
 		logger.info("리플 리스트 진입");
-List<ReplyListVO> reply = service.replyList(gdsNum);
+List<ReplyListVO> reply = service.replyList(contents_id);
 return reply;
 	}
 	
@@ -234,7 +236,51 @@ model.addAttribute("orderView", orderView);
 
 	}
 	
-	
+	//콘텐츠전체보기리스트
+		@GetMapping("/list")
+		public void getList(@RequestParam("c") int contents_category_code, @RequestParam("l") int level, Model model, HttpSession session)throws Exception {
+			logger.info("소비자 페이지 진입");
+			List<GoodsViewVO> list = null;
+			list = service.list(contents_category_code, level);
+			model.addAttribute("list",list);
+			//유저가 좋아요한 콘텐츠 선별
+			MemberVO member = (MemberVO) session.getAttribute("member");
+			if (member != null) {
+		        List<Integer> likedList = service.getLikedGoodsNums(member.getUserId());
+		        model.addAttribute("likedList", likedList);
+		    }
+		}
+		
+		//콘텐츠상세보기뷰
+		@GetMapping("/view")
+		public void getView(@RequestParam("n") int contents_id, Model model, HttpSession session) throws Exception {
+			logger.info("get view");
+			
+			GoodsViewVO view = service.goodsView(contents_id);
+			model.addAttribute("view",view);
+			//좋아요 상태 체크
+			MemberVO member = (MemberVO) session.getAttribute("member");
+			if (member != null) {
+		        boolean liked = service.toggleLike(member.getUserId(), contents_id);
+		        model.addAttribute("liked", liked);
+		    }
+		}
+		//좋아요
+		@ResponseBody
+		@PostMapping("/toggleLike")
+		public Map<String, Object> toggleLike(@RequestParam("contents_id") int contents_id, HttpSession session) throws Exception {
+			Map<String, Object> result = new HashMap<>();
+			MemberVO member = (MemberVO) session.getAttribute("member");
+			
+			if(member == null) {
+				result.put("status","unauthenticated");
+				return result;
+			}
+			boolean liked = service.toggleLike(member.getUserId(), contents_id);
+			result.put("status", "ok");
+			result.put("liked", liked);
+			return result;
+		}
 
 	
 	

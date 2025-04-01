@@ -15,13 +15,13 @@
 <div class="w-75 p-5">
 <h1 class="my-5 text-white">view</h1>
 <form role="form" method="post" autocomplete="off"><!-- jquery나 ajax일때는 method form 적지 말것 -->
-<input type="hidden" name="n" value="${goods.gdsNum}"/>
+<input type="hidden" name="n" value="${goods.contents_id}"/>
 <!-- 카테고리 -->
 <div class="input-group">
 <label class="form-label fw-bold text-white">1차 분류</label>
 <span class=" mx-2 text-white">${goods.cateName}</span>
 <label class="form-label fw-bold text-white">2차 분류</label>
-<span class=" mx-2 text-white">${goods.cateCode}</span>
+<span class=" mx-2 text-white">${goods.contents_category_code}</span>
 </div>
 
 <div class="input-group">
@@ -30,12 +30,12 @@
 </div>
 
 <div class="w-100 d-flex justify-content-center my-5">
-	<img src="${goods.gdsImg}" class="w-50 img-thumbnail"/>
+	<img src="${goods.contents_poster_img}" class="w-50 img-thumbnail"/>
 </div>
 
 <div class="input-group">
 	<label class="form-label w-25 fw-bold text-white">상품명</label>
-	<span class="w-75 text-white">${goods.gdsName}</span>
+	<span class="w-75 text-white">${goods.contents_title}</span>
 </div>
 
 <div class="input-group">
@@ -52,7 +52,7 @@
 
 <div class="input-group">
 	<label class="form-label w-25 fw-bold text-white">상품소개</label>
-	<span class="w-75 text-white">${goods.gdsDes}</span>
+	<span class="w-75 text-white">${goods.contents_description}</span>
 </div>
 
 <div class="d-flex justify-content-end my-5">

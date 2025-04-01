@@ -26,11 +26,11 @@
 <c:forEach items="${orderView }" var="orderView">
 <li class="list-group-item">
 <div class="">
-<img src="${orderView.gdsThumbImg}" class="img-thumbnail"/>
+<img src="${orderView.contents_thumb_img}" class="img-thumbnail"/>
 </div>
 <div>
 <pre>
-<span class="fw-bold">상품명</span>${orderView.gdsName}
+<span class="fw-bold">상품명</span>${orderView.contents_title}
 <span class="fw-bold">개당 가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.gdsPrice}"/>원
 <span class="fw-bold">구입 수량</span>${orderView.cartStock} 개
 <span class="fw-bold">최종 가격</span><fmt:formatNumber pattern="###,###,###" value="${orderView.gdsPrice * orderView.cartStock}"/>원

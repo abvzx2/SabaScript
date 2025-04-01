@@ -25,10 +25,10 @@ public class OrderDetailVO {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
-	public int getGdsNum() {
+	public int getgdsNum() {
 		return gdsNum;
 	}
-	public void setGdsNum(int gdsNum) {
+	public void setgdsNum(int gdsNum) {
 		this.gdsNum = gdsNum;
 	}
 	public int getCartStock() {

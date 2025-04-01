@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CartVO {
 
-	private int cartNum, gdsNum, cartStock;
+	private int cartNum, contents_id, cartStock;
 	private String userId;
 	private Date addDate;
 	
@@ -14,11 +14,11 @@ public class CartVO {
 	public void setCartNum(int cartNum) {
 		this.cartNum = cartNum;
 	}
-	public int getGdsNum() {
-		return gdsNum;
+	public int getcontents_id() {
+		return contents_id;
 	}
-	public void setGdsNum(int gdsNum) {
-		this.gdsNum = gdsNum;
+	public void setcontents_id(int contents_id) {
+		this.contents_id = contents_id;
 	}
 	public int getCartStock() {
 		return cartStock;

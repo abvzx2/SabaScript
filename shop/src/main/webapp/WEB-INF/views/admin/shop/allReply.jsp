@@ -15,7 +15,7 @@
 <li class="replyInfo list-group-item">
 <pre>
 <span class="fw-bold">작성자</span>${reply.userName}(${reply.userId})
-<span class="fw-bold">댓글을 작성한 제품</span><a href="/shop/view?n=${reply.gdsNum}">바로가기</a>
+<span class="fw-bold">댓글을 작성한 제품</span><a href="/shop/view?n=${reply.contents_id}">바로가기</a>
 
 <div class="replyContent">
 ${reply.repCon}

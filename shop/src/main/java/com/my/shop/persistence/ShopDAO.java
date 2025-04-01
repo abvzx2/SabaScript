@@ -14,17 +14,17 @@ import com.my.shop.vo.ReplyVO;
 public interface ShopDAO {
 	
 	//�긽�뭹由ъ뒪�듃
-	public List<GoodsViewVO> list(int cateCode, int cateCodeRef) throws Exception;
+	public List<GoodsViewVO> list(int contents_category_code, int catecodeRef) throws Exception;
 
-	List<GoodsViewVO> list(int cateCode) throws Exception;
+	List<GoodsViewVO> list(int contents_category_code) throws Exception;
 	
 	//�긽�뭹 view page
-	public GoodsViewVO goodsView(int gdsNum)throws Exception;
+	public GoodsViewVO goodsView(int contents_id)throws Exception;
 	
 	//�뙎湲��벐湲�
 	public void registReply(ReplyVO reply)throws Exception;	
 	//�뙎湲�由ъ뒪�듃
-	public List<ReplyListVO> replyList(int gdsNum)throws Exception;
+	public List<ReplyListVO> replyList(int contents_id)throws Exception;
 	//�뙎湲��궘�젣
 	public void deleteReply(ReplyVO reply)throws Exception;	
 	//�븘�씠�뵒 泥댄겕
@@ -56,6 +56,24 @@ public List<OrderVO> orderList(OrderVO order)throws Exception;
 
 //특정 오더뷰
 public List<OrderListVO> orderView(OrderVO order)throws Exception;	
+
+//좋아요
+	int checkLike(String userId, int contents_id) throws Exception;
+	
+	//좋아요추가
+	public void insertLike(String userId, int contents_id) throws Exception;
+	
+	//좋아요삭제
+	public void deleteLike(String userId, int contents_id) throws Exception;
+	
+	//좋아요증가
+	public void incrementLikes(int contents_id) throws Exception;
+	
+	//좋아요감소
+	public void decrementLikes(int contents_id) throws Exception;  
+	
+	//좋아요한 콘텐츠
+	List<Integer> getLikedGoodsNums(String userId) throws Exception;
 
 
 

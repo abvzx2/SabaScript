@@ -6,33 +6,35 @@
 <select id="list_1" resultType="com.my.shop.vo.GoodsViewVO">
 <![CDATA[
 select
-g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg
-from tbl_goods g
-inner join goods_category c
-on g.cateCode = c.cateCode
-where g.cateCode = #{cateCode}
-or c.cateCodeRef = #{cateCodeRef}
+g.contents_id, g.contents_title, g.contents_category_code, c.catecodeRef, c.cateName, gdsPrice, gdsStock, contents_description, contents_created_at, g.contents_poster_img, g.contents_thumb_img
+, (select count(*) from tbl_reply r where r.contents_id = g.contents_id) as gdsReviewCount
+from tbl_contents g
+inner join tbl_category c
+on g.contents_category_code = c.contents_category_code
+where g.contents_category_code = #{contents_category_code}
+or c.catecodeRef = #{catecodeRef}
 ]]>
 </select>
 <select id="list_2" resultType="com.my.shop.vo.GoodsViewVO">
 <![CDATA[
 select
-g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg
-from tbl_goods g
-inner join goods_category c
-on g.cateCode = c.cateCode
-where g.cateCode = #{cateCode}
-or c.cateCodeRef = #{cateCodeRef}
+g.contents_id, g.contents_title, g.contents_category_code, c.catecodeRef, c.cateName, gdsPrice, gdsStock, contents_description, contents_created_at, g.contents_poster_img, g.contents_thumb_img
+, (select count(*) from tbl_reply r where r.contents_id = g.contents_id) as gdsReviewCount
+from tbl_contents g
+inner join tbl_category c
+on g.contents_category_code = c.contents_category_code
+where g.contents_category_code = #{contents_category_code}
+or c.catecodeRef = #{catecodeRef}
 ]]>
 </select>
 <select id="goodsView" resultType="com.my.shop.vo.GoodsViewVO"><!-- view -->
 <![CDATA[
 select
-g.gdsNum, g.gdsName, g.cateCode, c.cateCodeRef, c.cateName, gdsPrice, gdsStock, gdsDes, gdsDate, g.gdsImg, g.gdsThumbImg
-from tbl_goods g
-inner join goods_category c
-on g.cateCode = c.cateCode
-where g.gdsNum = #{gdsNum}
+g.contents_id, g.contents_title, g.contents_category_code, c.catecodeRef, c.cateName, gdsPrice, gdsStock, contents_description, contents_created_at, g.contents_poster_img, g.contents_thumb_img
+from tbl_contents g
+inner join tbl_category c
+on g.contents_category_code = c.contents_category_code
+where g.contents_id = #{contents_id}
 ]]>
 </select>
 <!-- 
@@ -46,19 +48,19 @@ where g.gdsNum = #{gdsNum}
 <!-- 댓글시작 -->
 <insert id="registReply">
 <![CDATA[
-insert into tbl_reply(gdsNum, userId, repNum, repCon)
+insert into tbl_reply(contents_id, userId, repNum, repCon)
 values
-(#{gdsNum}, #{userId}, seq_tbl_reply.nextval, #{repCon})
+(#{contents_id}, #{userId}, seq_tbl_reply.nextval, #{repCon})
 ]]>
 </insert>
 <select id="replyList" resultType="com.my.shop.vo.ReplyListVO">
 <![CDATA[
 select
-r.gdsNum, r.userId, r.repNum, r.repCon, r.repDate, m.userName
+r.contents_id, r.userId, r.repNum, r.repCon, r.repDate, m.userName
 from tbl_reply r 
 inner join tbl_member m
 on r.userId = m.userId
-where gdsNum = #{gdsNum}
+where contents_id = #{contents_id}
 ]]>
 </select>
 <delete id="deleteReply"><!-- 세션때문에 기준을 두개  -->
@@ -86,9 +88,9 @@ and userId = #{userId}
 <!-- 카트 담기 -->
 <insert id="addCart">
 <![CDATA[
-insert into tbl_cart(cartNum, userId, gdsNum, cartStock)
+insert into tbl_cart(cartNum, userId, contents_id, cartStock)
 values
-( seq_tbl_cart.nextval,#{userId}, #{gdsNum}, #{cartStock})
+( seq_tbl_cart.nextval,#{userId}, #{contents_id}, #{cartStock})
 ]]>
 </insert>
 <!-- 카트 리스트 -->
@@ -96,11 +98,11 @@ values
 <![CDATA[
 select
 row_number() over(order by c.cartNum desc) as num,
-c.cartNum, c.userId, c.gdsNum, c.cartStock, c.addDate,
-g.gdsName, g.gdsPrice, g.gdsThumbImg
+c.cartNum, c.userId, c.contents_id, c.cartStock, c.addDate,
+g.contents_title, g.gdsPrice, g.contents_thumb_img
 from tbl_cart c
-inner join tbl_goods g
-on c.gdsNum = g.gdsNum
+inner join tbl_contents g
+on c.contents_id = g.contents_id
 where c.userId= #{userId}
 ]]>
 </select>
@@ -148,12 +150,12 @@ where userId = #{userId}
 select
 o.orderId, o.userId, o.orderRec, o.userAddr1, o.userAddr2, o.userAddr3, o.orderPhone, o.amount, o.orderDate,
 d.orderDetailsNum, d.gdsNum, d.cartStock,
-g.gdsName, g.gdsThumbImg, g.gdsPrice
+g.contents_title, g.contents_thumb_img, g.gdsPrice
 from tbl_order o
 inner join tbl_order_details d
 on o.orderId = d.orderId
-inner join tbl_goods g
-on d.gdsNum = g.gdsNum
+inner join tbl_contents g
+on d.contents_id = g.contents_id
 where o.userId = #{userId} and o.orderId=#{orderId}
 ]]>
  </select>
@@ -162,6 +164,44 @@ where o.userId = #{userId} and o.orderId=#{orderId}
 delete tbl_cart where userId = #{userId}
 ]]>
 </delete>
+
+<!-- 좋아요 시작 -->
+<select id="checkLike" resultType="int">
+<![CDATA[
+select count(*) from tbl_likes
+where userId = #{userId} and contents_id = #{contents_id}
+]]>
+</select>
+<insert id="insertLike">
+<![CDATA[
+insert into tbl_likes (userId, contents_id)
+values (#{userId}, #{contents_id})
+]]>
+</insert>
+<delete id="deleteLike">
+<![CDATA[
+delete from tbl_likes
+where userId = #{userId} and contents_id = #{contents_id}
+]]>
+</delete>
+<update id="incrementLikes">
+<![CDATA[
+update tbl_contents set contents_likes = contents_likes + 1 
+where contents_id = #{contents_id}
+]]>
+</update>
+<update id="decrementLikes">
+<![CDATA[
+update tbl_contents set contents_likes = contents_likes - 1 
+where contents_id = #{contents_id}
+]]>
+</update>
+<select id="getLikedGoodsNums" resultType="int">
+<![CDATA[
+select contents_id from tbl_likes where userId = #{userId}
+]]>
+</select>
+<!-- 좋아요 끝 -->
 </mapper>
 <!-- 
 

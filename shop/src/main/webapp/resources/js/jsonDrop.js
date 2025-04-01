@@ -8,10 +8,10 @@ var cate1Obj = new Object();
 //1차 분류 셀렉트 박스에 삽입할 데이터 준비
 for(var i = 0; i < jsonData.length; i++){
 //jsonData배열을 순회하면서 level이 "1"인 항목을 찾아 
-//cate1Obj에 cateCode와 catename을 저장하고 이를 cate1arr 배열에 추가합니다
+//cate1Obj에 contents_category_code와 catename을 저장하고 이를 cate1arr 배열에 추가합니다
 	if(jsonData[i].level == "1"){
 		cate1Obj = new Object(); //초기화
-		cate1Obj.cateCode = jsonData[i].cateCode;
+		cate1Obj.contents_category_code = jsonData[i].contents_category_code;
 		cate1Obj.cateName = jsonData[i].cateName;
 		cate1Arr.push(cate1Obj);
 	}
@@ -20,7 +20,7 @@ for(var i = 0; i < jsonData.length; i++){
 var cate1Select = $("select.category1")//선택된 카테고리 예를 들어 100
 
 for (var i=0; i < cate1Arr.length; i++){//만약 100,200,300,400
-cate1Select.append("<option value='"+ cate1Arr[i].cateCode +"'>" + cate1Arr[i].cateName + "</option>");
+cate1Select.append("<option value='"+ cate1Arr[i].contents_category_code +"'>" + cate1Arr[i].cateName + "</option>");
 }
 //비어져있는 optiontag에 밸류를 넣어줌
 /*
@@ -38,9 +38,9 @@ $(document).on("change", "select.category1", function(){
 	for(var i =0; i < jsonData.length; i++){
 	if(jsonData[i].level == "2"){
 		cate2Obj = new Object(); //초기화
-		cate2Obj.cateCode = jsonData[i].cateCode;
+		cate2Obj.contents_category_code = jsonData[i].contents_category_code;
 		cate2Obj.cateName = jsonData[i].cateName;
-		cate2Obj.cateCodeRef = jsonData[i].cateCodeRef;
+		cate2Obj.catecodeRef = jsonData[i].catecodeRef;
 		cate2Arr.push(cate2Obj);
 		}	
 	}
@@ -52,8 +52,8 @@ $(document).on("change", "select.category1", function(){
 		cate2Select.append("<option value='" + selectVal+ "'>전체</option>");
 		
 		for(var i=0; i < cate2Arr.length; i++){
-			if(selectVal == cate2Arr[i].cateCodeRef){
-cate2Select.append("<option value='"+ cate2Arr[i].cateCode +"'>" + cate2Arr[i].cateCode + "</option>");
+			if(selectVal == cate2Arr[i].catecodeRef){
+cate2Select.append("<option value='"+ cate2Arr[i].contents_category_code +"'>" + cate2Arr[i].contents_category_code + "</option>");
 			}
 		}
 	});

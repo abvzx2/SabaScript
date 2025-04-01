@@ -22,13 +22,13 @@ public interface AdminService {
 	public List<GoodsViewVO> goodslist() throws Exception;
 	
 	//상품조회
-	public GoodsViewVO goodsView(int gdsNum) throws Exception;
+	public GoodsViewVO goodsView(int contents_id) throws Exception;
 	
 	//상품수정
 	public void goodsModify(GoodsVO vo) throws Exception;
 	
 	//상품삭제
-	public void goodsDelete(int gdsNum) throws Exception;
+	public void goodsDelete(int contents_id) throws Exception;
 	
 	//주문목록
 	public List<OrderVO> orderList() throws Exception;

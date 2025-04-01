@@ -15,11 +15,11 @@ public class OrderListVO {
 	private Date orderDate;
 	
 	private int orderDetailsNum;
-	private int gdsNum;
+	private int contents_id;
 	private int cartStock;
 	
-	private String gdsName;
-	private String gdsThumbImg;
+	private String contents_title;
+	private String contents_thumb_img;
 	private int gdsPrice;
 	
 	private String delivery;
@@ -97,11 +97,11 @@ public class OrderListVO {
 	public void setOrderDetailsNum(int orderDetailsNum) {
 		this.orderDetailsNum = orderDetailsNum;
 	}
-	public int getGdsNum() {
-		return gdsNum;
+	public int getcontents_id() {
+		return contents_id;
 	}
-	public void setGdsNum(int gdsNum) {
-		this.gdsNum = gdsNum;
+	public void setcontents_id(int contents_id) {
+		this.contents_id = contents_id;
 	}
 	public int getCartStock() {
 		return cartStock;
@@ -109,16 +109,16 @@ public class OrderListVO {
 	public void setCartStock(int cartStock) {
 		this.cartStock = cartStock;
 	}
-	public String getGdsName() {
-		return gdsName;
+	public String getcontents_title() {
+		return contents_title;
 	}
-	public void setGdsName(String gdsName) {
-		this.gdsName = gdsName;
+	public void setcontents_title(String contents_title) {
+		this.contents_title = contents_title;
 	}
-	public String getGdsThumbImg() {
-		return gdsThumbImg;
+	public String getcontents_thumb_img() {
+		return contents_thumb_img;
 	}
-	public void setGdsThumbImg(String gdsThumbImg) {
-		this.gdsThumbImg = gdsThumbImg;
+	public void setcontents_thumb_img(String contents_thumb_img) {
+		this.contents_thumb_img = contents_thumb_img;
 	}
 }

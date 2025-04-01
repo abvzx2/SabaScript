@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class CartListVO {
 
-	private int cartNum, gdsNum, cartStock, num, gdsPrice;
-	private String userId, gdsName, gdsThumbImg;
+	private int cartNum, contents_id, cartStock, num, gdsPrice;
+	private String userId, contents_title, contents_thumb_img;
 	private Date addDate;
 	public int getNum() {
 		return num;
@@ -19,17 +19,17 @@ public class CartListVO {
 	public void setGdsPrice(int gdsPrice) {
 		this.gdsPrice = gdsPrice;
 	}
-	public String getGdsName() {
-		return gdsName;
+	public String getcontents_title() {
+		return contents_title;
 	}
-	public void setGdsName(String gdsName) {
-		this.gdsName = gdsName;
+	public void setcontents_title(String contents_title) {
+		this.contents_title = contents_title;
 	}
-	public String getGdsThumbImg() {
-		return gdsThumbImg;
+	public String getcontents_thumb_img() {
+		return contents_thumb_img;
 	}
-	public void setGdsThumbImg(String gdsThumbImg) {
-		this.gdsThumbImg = gdsThumbImg;
+	public void setcontents_thumb_img(String contents_thumb_img) {
+		this.contents_thumb_img = contents_thumb_img;
 	}
 
 	
@@ -39,11 +39,11 @@ public class CartListVO {
 	public void setCartNum(int cartNum) {
 		this.cartNum = cartNum;
 	}
-	public int getGdsNum() {
-		return gdsNum;
+	public int getcontents_id() {
+		return contents_id;
 	}
-	public void setGdsNum(int gdsNum) {
-		this.gdsNum = gdsNum;
+	public void setcontents_id(int contents_id) {
+		this.contents_id = contents_id;
 	}
 	public int getCartStock() {
 		return cartStock;

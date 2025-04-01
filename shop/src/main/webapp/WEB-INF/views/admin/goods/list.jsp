@@ -43,18 +43,18 @@
 <tbody>
 <c:forEach items="${list}" var="list">
 <tr>
-<td class="text-center">${list.gdsNum}</td>
-<td><img src="${list.gdsThumbImg}" class="thumb img-thumbnail"/></td>
+<td class="text-center">${list.contents_id}</td>
+<td><img src="${list.contents_thumb_img}" class="thumb img-thumbnail"/></td>
 <td>
-<a href="/admin/goods/view?n=${list.gdsNum}" class="text-white">
+<a href="/admin/goods/view?n=${list.contents_id}" class="text-white">
 <!-- 제목을 클릭할때 맞는 순번 상품순서로 view page-->
-${list.gdsName}<!-- 제목 -->
+${list.contents_title}<!-- 제목 -->
 </a>
 </td>
-<td class="text-center">${list.cateCode}</td>
+<td class="text-center">${list.contents_category_code}</td>
 <td class="text-center">${list.gdsPrice}</td>
 <td class="text-center">${list.gdsStock}</td>
-<td class="text-center">${list.gdsDate}</td>
+<td class="text-center">${list.contents_created_at}</td>
 </tr>
 </c:forEach>
 </tbody>

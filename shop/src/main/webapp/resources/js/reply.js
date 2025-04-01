@@ -2,11 +2,11 @@
 //다시 로딩하지 않고 필요한 일부분만 갱신
 $("#reply_btn").click(function(){
 	var formObj = $(".replyForm form[role='form']");
-	var gdsNum = $('#gdsNum').val();
+	var contents_id = $('#contents_id').val();
 	var repCon = $('#repCon').val();
 	
 	//ReplyVO형태로 데이터 생성
-	var data = {gdsNum:gdsNum, repCon:repCon};
+	var data = {contents_id:contents_id, repCon:repCon};
 	//
 	$.ajax({
 url:"/shop/view/registReply", type:"post", data:data, success:function(){

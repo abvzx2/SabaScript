@@ -50,11 +50,11 @@
 						</div>
 					
 						<div class="d-flex justify-content-between align-items-center">
-							<img src="${cartList.gdsThumbImg}" class="img-thumbnail w-25"/>
+							<img src="${cartList.contents_thumb_img}" class="img-thumbnail w-25"/>
 							
 							<div class="gdsInfo w-75 mx-3">
 <!-- <p class="p-3">
-	<div>상품명<span class="mx-3">${cartList.gdsName}</span></div>
+	<div>상품명<span class="mx-3">${cartList.contents_title}</span></div>
 	<div>개당 가격<span class="mx-3"><fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice}" /> 원</span></div>
 	<div>구입 수량<span class="mx-3">${cartList.cartStock} 개</span></div>
 	<div>최종 가격<span class="mx-3"><fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice * cartList.cartStock}" /> 원</span></div>

@@ -1,8 +1,8 @@
 $(".addCart_btn").click(function(){
-const gdsNum = $("#gdsNum").val();
+const contents_id = $("#contents_id").val();
 const cartStock = $(".numBox").val();
 
-const data = {gdsNum: gdsNum, cartStock:cartStock};
+const data = {contents_id: contents_id, cartStock:cartStock};
 
 $.ajax({
 	url:"/shop/view/addCart", type:"POST", data:data, success: function(){

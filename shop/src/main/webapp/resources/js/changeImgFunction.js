@@ -1,4 +1,4 @@
-$('#gdsImg').change(function(){//이미지 미리보기 처리html요소에 이벤트 리스너를 연결
+$('#contents_poster_img').change(function(){//이미지 미리보기 처리html요소에 이벤트 리스너를 연결
 //사용자가 이입력을 사용하여 이미지를 선택하면 change이벤트가 트리거 된다
 	if(this.files && this.files[0]){//배열이 채워졌는지(사용자가 파일을 선택했는지 확인)
 //files[0]선택된 첫번째 파일에 엑세스 파일입력은 여러 파일을 선택할수 있기 때문에 

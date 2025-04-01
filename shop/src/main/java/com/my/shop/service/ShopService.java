@@ -14,16 +14,16 @@ import com.my.shop.vo.ReplyVO;
 public interface ShopService {
 	
 	//移댄뀒怨좊━蹂� �긽�뭹 由ъ뒪�듃
-	public List<GoodsViewVO> list(int cateCode, int level) throws Exception;
+	public List<GoodsViewVO> list(int contents_category_code, int level) throws Exception;
 	
 	//�긽�뭹議고쉶
-	public GoodsViewVO goodsView(int gdsNum) throws Exception;
+	public GoodsViewVO goodsView(int contents_id) throws Exception;
 	
 	//�뙎湲��벐湲�
 	public void registReply(ReplyVO reply)throws Exception;
 	
 	//�뙎湲�由ъ뒪�듃
-	public List<ReplyListVO> replyList(int gdsNum) throws Exception;
+	public List<ReplyListVO> replyList(int contents_id) throws Exception;
 	
 	//�뙎湲��궘�젣
 	public void deleteReply(ReplyVO reply)throws Exception;
@@ -56,6 +56,12 @@ public interface ShopService {
 	
 	//오더뷰
 	public List<OrderListVO> orderView(OrderVO order) throws Exception;
+	
+	//좋아요 콘텐츠 선별
+		List<Integer> getLikedGoodsNums(String userId) throws Exception;
+		
+		//좋아요 상태 확인
+		boolean toggleLike(String userId, int contents_id) throws Exception;
 	
 	
 	

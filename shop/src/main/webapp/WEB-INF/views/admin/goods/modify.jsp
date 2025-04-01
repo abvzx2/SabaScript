@@ -13,12 +13,12 @@
 </div>
 <div class="w-75 p-3">
 <form role="form" method="post" enctype="multipart/form-data">
-<input type="hidden" name="gdsNum" value="${goods.gdsNum}"/>
+<input type="hidden" name="contents_id" value="${goods.contents_id}"/>
 
 <div class="d-flex my-3">
 	<div class="text-white">기등록 카테고리</div>
 	<div class="text-white mx-3">${goods.cateName}</div>
-	<div class="text-white mx-3">${goods.cateCode}</div>
+	<div class="text-white mx-3">${goods.contents_category_code}</div>
 </div>
 
 <!-- 카테고리 -->
@@ -28,12 +28,12 @@
 	    <select name="category1" id="" class="form-select category1">
 
 	  <c:forEach var="cate" items="${category}">
-        <c:if test="${cate.cateCodeRef == null}">
-          <option value="${cate.cateCode}" ${goods.cateCodeRef == cate.cateCode ? 'selected' : ''}>
+        <c:if test="${cate.catecodeRef == null}">
+          <option value="${cate.contents_category_code}" ${goods.catecodeRef == cate.contents_category_code ? 'selected' : ''}>
                 ${cate.cateName}>
           </option>
       	</c:if>
-      	<c:if test="${cate.cateCodeRef != null}">
+      	<c:if test="${cate.catecodeRef != null}">
       		<option value="">
       		${cate.cateName}
       		</option>
@@ -43,13 +43,13 @@
 	</label>
 
     <label class="form-label fw-bold mx-3 text-white">2차 분류
-        <select name="cateCode" id="" class="form-select category2">
+        <select name="contents_category_code" id="" class="form-select category2">
 			<c:forEach var="cate" items="${category}">
-		        <c:if test="${cate.cateCodeRef != null}">
+		        <c:if test="${cate.catecodeRef != null}">
 
-		            <option value="${cate.cateCode}" 
-		                data-ref="${cate.cateCodeRef}"
-		                ${goods.cateCode == cate.cateCode ? 'selected' : ''}>
+		            <option value="${cate.contents_category_code}" 
+		                data-ref="${cate.catecodeRef}"
+		                ${goods.contents_category_code == cate.contents_category_code ? 'selected' : ''}>
 		                ${cate.cateName}
 		            </option>
 		            
@@ -64,7 +64,7 @@
 <!--수정할때 쓰기와 다른점 기존에 썼던 내용을 받아와야 해서 input에 밸류가 el로 들어감-->
 <div class="input-group my-3">
     <label class="form-label fw-bold w-25 text-white">상품명</label>
-    <input type="text" id="gdsName" name="gdsName" value="${goods.gdsName}" class="form-control">
+    <input type="text" id="contents_title" name="contents_title" value="${goods.contents_title}" class="form-control">
 </div>
 
 <div class="input-group mb-3">
@@ -79,7 +79,7 @@
 
 <div class="input-group">
     <label class="form-label w-25 fw-bold text-white">상품소개</label>
-    <textarea name="gdsDes" id="gdsDes" rows="5">${goods.gdsDes}</textarea>
+    <textarea name="contents_description" id="contents_description" rows="5">${goods.contents_description}</textarea>
 <script src="${contextPath}/resources/js/ckeditorConfig.js">
 </script>
 </div>
@@ -87,13 +87,13 @@
 <!--이미지 추가-->
 <div class="input-group mt-3">
     <label class="form-label fw-bold w-25 text-white">이미지</label>
-    <input type="file" id="gdsImg" name="file" class="form-control"/>
+    <input type="file" id="contents_poster_img" name="file" class="form-control"/>
 </div>
 <div class="my-3">
     <div class="select_img d-flex justify-content-end">
-        <img src="${goods.gdsImg}" alt="이미지 이므니다" class="thumb img-thumbnail">
-        <input type="hidden" name="gdsImg" value="${goods.gdsImg}"/>
-        <input type="hidden" name="gdsThumbImg" value="${goods.gdsThumbImg}"/>
+        <img src="${goods.contents_poster_img}" alt="이미지 이므니다" class="thumb img-thumbnail">
+        <input type="hidden" name="contents_poster_img" value="${goods.contents_poster_img}"/>
+        <input type="hidden" name="contents_thumb_img" value="${goods.contents_thumb_img}"/>
     </div>
 <script src="${contextPath}/resources/js/changeImgFunction.js">       
 </script>

@@ -47,10 +47,10 @@
 		</div>
 
 <div class="img-thumbnail">
-	<img src="${cartList.gdsThumbImg }"/>
+	<img src="${cartList.contents_thumb_img }"/>
 </div>
 <pre>
-상품명    ${cartList.gdsName}
+상품명    ${cartList.contents_title}
 개당 가격 <fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice}"/> 원
 구입 수량  ${cartList.cartStock} 개
 최종 가격 <fmt:formatNumber pattern="###,###,###" value="${cartList.gdsPrice * cartList.cartStock}"/> 원  

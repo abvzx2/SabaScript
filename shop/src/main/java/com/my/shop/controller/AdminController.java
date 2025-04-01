@@ -79,14 +79,14 @@ String fileName = null;
 if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 	fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
 	//원본파일경로 + 파일명 저장
-	vo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+	vo.setcontents_poster_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 	//썸네일
-vo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator +"s"+File.separator+"s_" +fileName);	
+vo.setcontents_thumb_img(File.separator + "imgUpload" + ymdPath + File.separator +"s"+File.separator+"s_" +fileName);	
 }else {//첨부된 파일이 없으면 
 //미리 업로드 시켜놓은 none.png파일을 대신 출력
 	fileName = File.separator + "images" + File.separator + "none.png";
-	vo.setGdsImg(fileName);
-	vo.setGdsThumbImg(fileName);
+	vo.setcontents_poster_img(fileName);
+	vo.setcontents_thumb_img(fileName);
 }
 
 
@@ -105,10 +105,10 @@ model.addAttribute("list",list);
 	
 //상품조회 1)리스트에서 리스트 글들중에 제목을 선택하는데 그제목에 해당글에 순번이 랩핑 2)랩핑된걸로 요청 3)순번에 맞는 read page 보여줌
 	@GetMapping(value="/goods/view")
-	public void getGoodsview(@RequestParam("n") int gdsNum, Model model)throws Exception{
+	public void getGoodsview(@RequestParam("n") int contents_id, Model model)throws Exception{
 logger.info("상세페이지");
 //리턴시킬 변수 정의
-GoodsViewVO goods = adminService.goodsView(gdsNum);
+GoodsViewVO goods = adminService.goodsView(contents_id);
 model.addAttribute("goods", goods);
 
 	}
@@ -161,11 +161,11 @@ if(printWriter != null) {printWriter.close();}
 
 //상품수정 1)수정할 글을 불러온다 2)그 순번에 맞는 글을 수정한다
 @GetMapping(value="/goods/modify")
-public void getGoodsModify(@RequestParam("n") int gdsNum, Model model) throws Exception{
-//@RequestParam("n")으로 인해, URL주소에 있는 n의 값을 가져와 gdsNum에 저장
+public void getGoodsModify(@RequestParam("n") int contents_id, Model model) throws Exception{
+//@RequestParam("n")으로 인해, URL주소에 있는 n의 값을 가져와 contents_id에 저장
 	logger.info("수정페이지 진입");
 	//GoodsViewVO변수에 goods상품정보를 저장
-	GoodsViewVO goods = adminService.goodsView(gdsNum);
+	GoodsViewVO goods = adminService.goodsView(contents_id);
 	model.addAttribute("goods",goods);
 	//카테고리 내용을 가져와야 함
 	List<CategoryVO> category = null;
@@ -185,19 +185,19 @@ public String postGoodsModify(GoodsVO vo, MultipartFile file, HttpServletRequest
 	//새로운 파일이 등록되었는지 확인
 	if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
 		//1)기존 파일을 삭제 (이미지와 썸이미지를 둘다삭제)
-		new File(uploadPath + req.getParameter("gdsImg")).delete();
-		new File(uploadPath + req.getParameter("gdsThumbImg")).delete();
+		new File(uploadPath + req.getParameter("contents_poster_img")).delete();
+		new File(uploadPath + req.getParameter("contents_thumb_img")).delete();
 		//2)새로 첨부한 파일을 등록
 		String imgUploadPath = uploadPath + File.separator + "imgUpload";
 		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
 		String fileName = UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
-vo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+vo.setcontents_poster_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
 //2025\02\17\666cccc-nnnn-.jpg
-vo.setGdsThumbImg(File.separator+ "imgUpload" + ymdPath + File.separator+ "s"+File.separator +"s_"+ fileName);
+vo.setcontents_thumb_img(File.separator+ "imgUpload" + ymdPath + File.separator+ "s"+File.separator +"s_"+ fileName);
 //2025\02\17\s\s_666cccc-nnnn-.jpg
 	}else {//새로운 파일이 등록되지 않았다면 기존 이미지를 그대로 사용
-vo.setGdsImg(req.getParameter("gdsImg"));
-vo.setGdsThumbImg(req.getParameter("gdsThumbImg"));
+vo.setcontents_poster_img(req.getParameter("contents_poster_img"));
+vo.setcontents_thumb_img(req.getParameter("contents_thumb_img"));
 	}
 	adminService.goodsModify(vo);
 	return "redirect:/admin/index";
@@ -205,9 +205,9 @@ vo.setGdsThumbImg(req.getParameter("gdsThumbImg"));
 
 //상품삭제
 @PostMapping(value="/goods/delete")
-public String postGoodsDelete(@RequestParam("n") int gdsNum) throws Exception{
+public String postGoodsDelete(@RequestParam("n") int contents_id) throws Exception{
 	logger.info("상품삭제");
-	adminService.goodsDelete(gdsNum);
+	adminService.goodsDelete(contents_id);
 	return "redirect:/admin/index";
 }
 
@@ -242,7 +242,7 @@ public String delivery(OrderVO order) throws Exception{
 	GoodsVO goods = new GoodsVO();
 	
 	for(OrderListVO i : orderView) {
-		goods.setGdsNum(i.getGdsNum());
+		goods.setcontents_id(i.getcontents_id());
 		goods.setGdsStock(i.getCartStock());
 		adminService.changeStock(goods);
 	}

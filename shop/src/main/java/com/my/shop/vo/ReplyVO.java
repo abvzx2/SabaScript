@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class ReplyVO {
 	
-	private int gdsNum, repNum;
+	private int contents_id, repNum;
 	private String userId, repCon;
 	private Date repDate;
-	public int getGdsNum() {
-		return gdsNum;
+	public int getcontents_id() {
+		return contents_id;
 	}
-	public void setGdsNum(int gdsNum) {
-		this.gdsNum = gdsNum;
+	public void setcontents_id(int contents_id) {
+		this.contents_id = contents_id;
 	}
 	public int getRepNum() {
 		return repNum;

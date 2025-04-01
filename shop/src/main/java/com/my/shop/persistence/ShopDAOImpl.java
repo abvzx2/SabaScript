@@ -2,6 +2,7 @@ package com.my.shop.persistence;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -27,24 +28,24 @@ public class ShopDAOImpl implements ShopDAO {
 	private static String namespace ="com.my.shop.mappers.shopMapper";
 
 	@Override//援곗쑝濡� 遺꾨쪟�븯湲� �쐞�빐�꽌 �빐�떆留� �궗�슜
-	public List<GoodsViewVO> list(int cateCode, int cateCodeRef) throws Exception {
+	public List<GoodsViewVO> list(int contents_category_code, int catecodeRef) throws Exception {
 		
 		HashMap<String, Object> map = new HashMap<>();
 		//�뼱�젅�씠 由ъ뒪�듃 異붽��븷�븣�뒗 �빐�떆留듭� put
-		map.put("cateCode", cateCode);//map.put(null, map)
-		map.put("cateCodeRef", cateCodeRef);//map.put(null, map)
+		map.put("contents_category_code", contents_category_code);//map.put(null, map)
+		map.put("catecodeRef", catecodeRef);//map.put(null, map)
 		
 		return sql.selectList(namespace + ".list_1", map);
 	}
 	
 	@Override
-	public List<GoodsViewVO> list(int cateCode) throws Exception {
-		return sql.selectList(namespace + ".list_2", cateCode);
+	public List<GoodsViewVO> list(int contents_category_code) throws Exception {
+		return sql.selectList(namespace + ".list_2", contents_category_code);
 	}
 
 	@Override//�긽�뭹 view page �븳媛쒖쓽�뻾�씠 �엳�뒗吏� 寃��궗�븯�뒗 ���젆�듃�썝(�븯�굹�씠�긽 �씪�븣 �닾留ㅻ땲 �씡�뀎�뀡�쓣 諛쒖깮)
-	public GoodsViewVO goodsView(int gdsNum) throws Exception {
-		return sql.selectOne("com.my.shop.mappers.adminMapper"+".goodsView",gdsNum);
+	public GoodsViewVO goodsView(int contents_id) throws Exception {
+		return sql.selectOne("com.my.shop.mappers.adminMapper"+".goodsView",contents_id);
 	}
 	//�뙎湲��벐湲�
 	@Override
@@ -53,8 +54,8 @@ sql.insert(namespace + ".registReply", reply);
 	}
 	//�뙎湲�由ъ뒪�듃
 	@Override
-	public List<ReplyListVO> replyList(int gdsNum) throws Exception {
-		return sql.selectList(namespace + ".replyList", gdsNum);
+	public List<ReplyListVO> replyList(int contents_id) throws Exception {
+		return sql.selectList(namespace + ".replyList", contents_id);
 	}
 	//�뙎湲��궘�젣
 	@Override
@@ -118,6 +119,51 @@ sql.delete(namespace + ".deleteReply", reply);
 	public List<OrderListVO> orderView(OrderVO order) throws Exception {
 		return sql.selectList(namespace + ".orderView", order);
 	}
+	
+	//좋아요
+		@Override
+		public int checkLike(String userId, int contents_id) throws Exception {
+			Map<String, Object> map = new HashMap<>();
+			map.put("userId", userId);
+			map.put("contents_id", contents_id);
+			return sql.selectOne(namespace + ".checkLike", map);
+		}
+
+		//좋아요쓰기
+		@Override
+		public void insertLike(String userId, int contents_id) throws Exception {
+			Map<String, Object> map = new HashMap<>();
+			map.put("userId", userId);
+			map.put("contents_id", contents_id);
+			sql.insert(namespace + ".insertLike", map);
+		}
+
+		//좋아요삭제
+		@Override
+		public void deleteLike(String userId, int contents_id) throws Exception {
+			Map<String, Object> map = new HashMap<>();
+			map.put("userId", userId);
+			map.put("contents_id", contents_id);
+			sql.delete(namespace + ".deleteLike", map);
+		}
+
+		//좋아요증가
+		@Override
+		public void incrementLikes(int contents_id) throws Exception {
+			sql.update(namespace + ".incrementLikes", contents_id);
+		}
+
+		//좋아요감소
+		@Override
+		public void decrementLikes(int contents_id) throws Exception {
+			sql.update(namespace + ".decrementLikes", contents_id);
+		}
+
+		//좋아요한 콘텐츠
+		@Override
+		public List<Integer> getLikedGoodsNums(String userId) throws Exception {
+			return sql.selectList(namespace + ".getLikedGoodsNums", userId);
+		}
 
 
 	

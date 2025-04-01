@@ -39,8 +39,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 //view
 	@Override
-	public GoodsViewVO goodsView(int gdsNum) throws Exception {
-		return dao.goodsView(gdsNum);
+	public GoodsViewVO goodsView(int contents_id) throws Exception {
+		return dao.goodsView(contents_id);
 	}
 
 	@Override
@@ -49,8 +49,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void goodsDelete(int gdsNum) throws Exception {
-		dao.goodsDelete(gdsNum);
+	public void goodsDelete(int contents_id) throws Exception {
+		dao.goodsDelete(contents_id);
 		
 	}
 

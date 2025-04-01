@@ -5,4 +5,4 @@ enterMode : CKEDITOR.ENTER_BR,
 shiftEnterMode : CKEDITOR.ENTER_P,
 filebrowserUploadUrl : "/admin/goods/ckUpload"
 }
-CKEDITOR.replace("gdsDes", ckeditor_config);
+CKEDITOR.replace("contents_description", ckeditor_config);

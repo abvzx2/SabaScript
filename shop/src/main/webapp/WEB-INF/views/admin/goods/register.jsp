@@ -21,7 +21,7 @@
 </option>
 </select>
 <label class="form-label text-white">2차 분류</label>
-<select class="form-select category2 mx-3" name="cateCode">
+<select class="form-select category2 mx-3" name="contents_category_code">
 <option value="">
 전체
 </option>
@@ -30,12 +30,12 @@
 
 <div class="input-group mt-5">
 <label class="form-label text-white w-10">상품명</label>
-<input type="text" id="gdsName" name="gdsName" class="form-control w-90" required/>
+<input type="text" id="contents_title" name="contents_title" class="form-control w-90" required/>
 </div>
 
-<div class="input-group mt-5"><!-- gdsPrice->gdsUrl 수정 -->
+<div class="input-group mt-5"><!-- gdsPrice->contents_video_url 수정 -->
 <label class="form-label text-white w-10">동영상 URL 주소</label>
-<input type="text" id="gdsUrl" name="gdsUrl" class="form-control w-90" required/>
+<input type="text" id="contents_video_url" name="contents_video_url" class="form-control w-90" required/>
 </div>
 
 <div class="input-group mt-5"><!-- 실패하는 경우 수량에는 숫자가 아닌 문자열을 사용할수 없게 만듬 10 11많음 -->
@@ -45,14 +45,14 @@
 
 <div class="input-group mt-5">
 <label class="form-label text-white w-10">상품소개</label>
-<textarea rows="5" id="gdsDes" name="gdsDes" class="form-control" required>내용을 적어주세요</textarea>
+<textarea rows="5" id="contents_description" name="contents_description" class="form-control" required>내용을 적어주세요</textarea>
 <script src="${contextPath}/resources/js/ckeditorConfig.js">
 </script>
 </div>
 
 <div class="input-group mt-5"><!-- 실제 파일을 올리는곳 -->
 <label class="form-label text-white w-10">이미지</label>
-<input type="file" id="gdsImg" name="file" class="form-control w-90"/>
+<input type="file" id="contents_poster_img" name="file" class="form-control w-90"/>
 </div>
 
 <!-- 아래는 올린 이미지를 확인 -->
@@ -61,9 +61,9 @@
 </div>
 <div class="d-flex">
 <div class="text-white">원본 이미지</div>
-<img src="${goods.gdsImg}" style="width:100px;"/>
+<img src="${goods.contents_poster_img}" style="width:100px;"/>
 <div class="text-white">썸네일</div>
-<img src="${goods.gdsThumbImg}" style="width:50px;"/>
+<img src="${goods.contents_thumb_img}" style="width:50px;"/>
 </div>
 <script src="${contextPath}/resources/js/changeImgFunction.js"></script>
 <div class="text-white"><%=request.getRealPath("/") %></div>

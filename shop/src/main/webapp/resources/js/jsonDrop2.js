@@ -6,7 +6,7 @@ for(var i = 0; i < jsonData.length; i++) {
 	
 	if(jsonData[i].level == "1") {
 		cate1Obj = new Object();  //초기화
-		cate1Obj.cateCode = jsonData[i].cateCode;
+		cate1Obj.contents_category_code = jsonData[i].contents_category_code;
 		cate1Obj.cateName = jsonData[i].cateName;
 		cate1Arr.push(cate1Obj);
 	}
@@ -15,7 +15,7 @@ for(var i = 0; i < jsonData.length; i++) {
 var cate1Select = $("select.category1")
 
 for(var i = 0; i < cate1Arr.length; i++) {
-	cate1Select.append("<option value='" + cate1Arr[i].cateCode + "'>"
+	cate1Select.append("<option value='" + cate1Arr[i].contents_category_code + "'>"
 						+ cate1Arr[i].cateName + "</option>");	
 }
 
@@ -29,9 +29,9 @@ $(document).on("change", "select.category1", function(){
 		
 		if(jsonData[i].level == "2") {
 			cate2Obj = new Object();
-			cate2Obj.cateCode = jsonData[i].cateCode;
+			cate2Obj.contents_category_code = jsonData[i].contents_category_code;
 			cate2Obj.cateName = jsonData[i].cateName;
-			cate2Obj.cateCodeRef = jsonData[i].cateCodeRef;
+			cate2Obj.catecodeRef = jsonData[i].catecodeRef;
 			
 			cate2Arr.push(cate2Obj);
 		} 
@@ -41,7 +41,7 @@ $(document).on("change", "select.category1", function(){
 	
 	/*
 	for(var i = 0; i < cate2Arr.length; i++) {
-			cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
+			cate2Select.append("<option value='" + cate2Arr[i].contents_category_code + "'>"
 								+ cate2Arr[i].cateName + "</option>");
 	}
 	*/
@@ -55,31 +55,31 @@ $(document).on("change", "select.category1", function(){
 		cate2Select.append("<option value='" + selectVal + "'>전체</option>");
 		
 		for(var i = 0; i < cate2Arr.length; i++) {
-			if(selectVal == cate2Arr[i].cateCodeRef) {
-				cate2Select.append("<option value='" + cate2Arr[i].cateCode + "'>"
+			if(selectVal == cate2Arr[i].catecodeRef) {
+				cate2Select.append("<option value='" + cate2Arr[i].contents_category_code + "'>"
 									+ cate2Arr[i].cateName + "</option>");
 			}
 		}		
 	});
 });
 
-var select_cateCode = '${goods.cateCode}';
-var select_cateCodeRef = '${goods.cateCodeRef}';
+var select_contents_category_code = '${goods.contents_category_code}';
+var select_catecodeRef = '${goods.catecodeRef}';
 var select_cateName = '${goods.cateName}';
 
-console.log("select_cateCode = " + select_cateCode);
-console.log("select_cateCodeRef = " + select_cateCodeRef);
+console.log("select_contents_category_code = " + select_contents_category_code);
+console.log("select_catecodeRef = " + select_catecodeRef);
 
 
-if(select_cateCodeRef != null && select_cateCodeRef != "") {
+if(select_catecodeRef != null && select_catecodeRef != "") {
 	
 	console.log("값이 없으면");
 	
-	$(".category1").val(select_cateCodeRef);
-	$(".category2").val(select_cateCode);
+	$(".category1").val(select_catecodeRef);
+	$(".category2").val(select_contents_category_code);
 	$(".category2").children().remove();
 	$(".category2").append("<option value='"
-							+ select_cateCode + "'>" + select_cateName + "</option>");
+							+ select_contents_category_code + "'>" + select_cateName + "</option>");
 
 
 	
@@ -88,8 +88,8 @@ if(select_cateCodeRef != null && select_cateCodeRef != "") {
 	
 	console.log("값이 있으면");
 	
-	$(".category1").val(select_cateCode);
-	//$(".category2").val(select_cateCode);
+	$(".category1").val(select_contents_category_code);
+	//$(".category2").val(select_contents_category_code);
 	$(".category2").append("<option value='"
-			+ select_cateCode + "' selected='selected'>전체</option>");
+			+ select_contents_category_code + "' selected='selected'>전체</option>");
 }

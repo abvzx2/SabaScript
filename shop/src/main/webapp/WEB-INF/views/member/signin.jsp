@@ -24,6 +24,7 @@
                                         type="text"
                                         class="userIdIcon form-control-user" 
                                         name="userId"
+                                        placeholder="ID"
                                         required="required"
                                         />
                                     </div>
@@ -32,6 +33,7 @@
                                         type="password"
                                         class="userPassIcon form-control-user" 
                                         name="userPass"
+                                        placeholder="Password"
                                         required="required"
                                         />
                                     </div>

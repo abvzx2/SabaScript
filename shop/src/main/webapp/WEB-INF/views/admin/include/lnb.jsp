@@ -6,31 +6,31 @@
 <div class="mt-3">&nbsp;</div>
 <ul class="list-group mt-5">
 
-<li class="list-group-item">
+<li class="list-group-item my-1">
 	<a href="${contextPath}/admin/goods/register" class="a-link text-decoration-none">
 	상품등록
 	</a>
 </li>
 
-<li class="list-group-item">
+<li class="list-group-item my-1">
 	<a href="${contextPath}/admin/goods/list" class="a-link text-decoration-none">
 	상품목록
 	</a>
 </li>
 
-<li class="list-group-item">
+<li class="list-group-item my-1">
 	<a href="${contextPath}/admin/shop/orderList" class="a-link text-decoration-none">
 	주문목록
 	</a>
 </li>
 
-<li class="list-group-item">
+<li class="list-group-item my-1">
 	<a href="${contextPath}/admin/shop/allReply" class="a-link text-decoration-none">
 	상품소감
 	</a>
 </li>
 
-<li class="list-group-item">
+<li class="list-group-item my-1">
 	<a href="${contextPath}/admin/shop/allReply" class="a-link text-decoration-none">
 	유저목록
 	</a>

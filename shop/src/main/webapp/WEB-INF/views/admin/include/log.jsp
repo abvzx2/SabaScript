@@ -9,7 +9,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mt-3 text-white fw-bold ">Dashboard</h1>
+                        <h1 class="h3 mt-5 text-white fw-bold">Dashboard</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 

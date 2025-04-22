@@ -1,6 +1,7 @@
 package com.my.shop.controller;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -282,8 +283,33 @@ model.addAttribute("orderView", orderView);
 			return result;
 		}
 
+		//스크랩
+		@GetMapping("/scrap")
+		public String getScrap(Model model, HttpSession session) throws Exception {
+		    MemberVO member = (MemberVO) session.getAttribute("member");
+		    
+		    if (member == null) {
+		        return "redirect:/member/signin";
+		    }
+
+		    List<Integer> likedIds = service.getLikedGoodsNums(member.getUserId());
+		    List<GoodsViewVO> likedContents = new ArrayList<>();
+
+		    for (int id : likedIds) {
+		    	GoodsViewVO contents = service.goodsView(id);
+		        likedContents.add(contents);
+		    }
+
+		    model.addAttribute("list", likedContents);
+		    return "shop/scrap";
+		}
 	
-	
+		//list
+		// QnA
+		@GetMapping("/QnAList")
+		public void getQnAList() throws Exception{
+			logger.info("QnA 화면 진입");
+		}
 	
 	
 	

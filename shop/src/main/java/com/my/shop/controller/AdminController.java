@@ -263,7 +263,9 @@ public String postAllReply(ReplyVO reply)throws Exception{
 	adminService.deleteReply(reply.getRepNum());
 	return "redirect:/admin/shop/allReply";
 }	
-	
+
+
+
 	
 	
 

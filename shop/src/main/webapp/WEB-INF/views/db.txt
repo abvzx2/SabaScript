@@ -216,3 +216,29 @@ CREATE TABLE tbl_likes (
     ON DELETE CASCADE
 );
 ALTER TABLE tbl_likes RENAME COLUMN contents_id TO contents_id;
+
+
+4.1
+create sequence seq_contents_id;
+
+alter table tbl_contents modify gdsStock default 1;
+
+
+4.2
+ALTER TABLE tbl_reply DROP constraint TBL_REPLY_CONTENTS_ID;
+
+ALTER TABLE tbl_reply ADD CONSTRAINT tbl_reply_contents_id foreign key (CONTENTS_ID) references tbl_contents(contents_id) on delete cascade;
+
+ALTER TABLE tbl_cart DROP constraint TBL_cart_gdsNum;
+
+ALTER TABLE tbl_cart ADD CONSTRAINT tbl_reply_gdsNum foreign key (CONTENTS_ID) references tbl_contents(contents_id) on delete cascade;
+
+create table tbl_qna(
+userId VARCHAR2(100) not null,
+qna_title VARCHAR2(500) not null,
+qna_content VARCHAR2(4000) not null,
+qna_num number not null,
+qna_verify number not null,
+qna_date date default sysdate,
+qna_category VARCHAR2(200) not null,
+qna_answerCheck number not null

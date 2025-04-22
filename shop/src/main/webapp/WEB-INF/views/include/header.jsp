@@ -69,6 +69,9 @@
                <li class="nav-item">
                   <a class="text-decoration-none text-white link-danger" href="${contextPath}/shop/list?c=101&l=2">Contents</a>
                </li>
+               <li class="nav-item mx-3">
+                  <a class="nav-link text-white link-danger" href="${contextPath}/shop/QnAList">Q&A</a>
+               </li>
             </c:if>
             <!-- 로그인을 했을때 -->
             <c:if test="${member != null }">
@@ -84,11 +87,15 @@
                   <a class="nav-link fw-bold text-white link-danger" href="${contextPath}/shop/list?c=1&l=2">Contents</a>
                </li>
                <li class="nav-item fw-bold mx-2">
-                  <a class="nav-link text-white link-danger" href="${contextPath}/shop/cartList">Scrap</a>
+                  <a class="nav-link text-white link-danger" href="${contextPath}/shop/scrap">Scrap</a>
+               </li>
+               <li class="nav-item mx-3">
+                  <a class="nav-link text-white link-danger" href="${contextPath}/shop/QnAList">Q&A</a>
                </li>
                <li class="nav-item fw-bold mx-3">
                   <a class="nav-link small text-white link-danger" href="${contextPath}/member/signout">Logout</a>
                </li>
+               
          
                  <!-- 로그인을 했는데 관리자라면 -->
                <c:if test="${member.verify == 9 }">

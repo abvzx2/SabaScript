@@ -10,9 +10,7 @@
 <div class="mt-1"></div>
 <jsp:include page="include/lnb.jsp"/>
 </div>
-<div class="w-90">
-<jsp:include page="include/log.jsp"/>
-</div>
+
 </div>
 </div>
 </div>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <jsp:include page="../include/header.jsp" flush="false"/>
 
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12 col-md-9">
@@ -18,7 +19,7 @@
                            <p class="text-muted">Welcome Back!</p>
                         </div>
                         
-                                <form method="post" action="/member/signin" class="needs-validation" novalidate>
+                                <form method="post" action="/member/signin" class="needs-validation">
                                     <div class="mb-3">
                                         <input
                                         type="text"

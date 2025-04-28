@@ -19,16 +19,16 @@ public class MemberServiceImpl implements MemberService {
 		dao.signup(vo);
 
 	}
-//로그인
+	
+	//로그인
 	@Override
 	public MemberVO signin(MemberVO vo) throws Exception {
 		return dao.signin(vo);
 	}
-//로그아웃
+	
+	//로그아웃
 	@Override
 	public void signout(HttpSession session) throws Exception {
-session.invalidate();//세션 정보를 제거
-		
+		session.invalidate();//세션 정보를 제거
 	}
-
 }

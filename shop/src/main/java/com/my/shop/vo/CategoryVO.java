@@ -7,8 +7,6 @@ public class CategoryVO {
 	private String catecodeRef;
 	private int level;
 	
-
-
 	//getter
 	public String getCateName() {return cateName;}
 	public String getcontents_category_code() {return contents_category_code;}
@@ -19,7 +17,4 @@ public class CategoryVO {
 	public void setcontents_category_code(String contents_category_code) {this.contents_category_code = contents_category_code;}
 	public void setcatecodeRef(String catecodeRef) {this.catecodeRef = catecodeRef;}
 	public void setLevel(int level) {this.level = level;}
-
-	
-
 }

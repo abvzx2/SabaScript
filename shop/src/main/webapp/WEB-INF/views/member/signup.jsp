@@ -23,6 +23,7 @@
                                  <input
                                  type="text"
                                  name="userId"
+                                 placeholder="ID"
                                  class="form-control-user userIdIcon"
                                  required="required"
                                  />
@@ -31,6 +32,7 @@
                                  <input
                                  type="password"
                                  name="userPass"
+                                 placeholder="Password"
                                  class="form-control-user userPassIcon"
                                  required="required"
                                  />
@@ -39,6 +41,7 @@
                                  <input
                                  type="password"
                                  name="userPassRe"
+                                 placeholder="Password 確認"
                                  class="form-control-user userPassReIcon"
                                  required="required"
                                  />
@@ -57,6 +60,7 @@
                                  <input
                                  type="text"
                                  name="userName"
+                                 placeholder="お名前"
                                  class="form-control-user userNameIcon"
                                  required="required"
                                  />
@@ -65,6 +69,7 @@
                                  <input
                                  type="text"
                                  name="userEmail"
+                                 placeholder="メールアドレス"
                                  class="form-control-user userEmailIcon"
                                  required="required"
                                  />
@@ -73,12 +78,13 @@
                                  <input
                                  type="text"
                                  name="userPhone"
+                                 placeholder="電話番号"
                                  class="form-control-user userPhoneIcon"
                                  required="required"
                                  />
                               </div>
                               <div class="mb-2">
-                                 <label class="form-label text-dark">アドレス <small class="text-dark">address</small></label>
+                                 <label class="form-label text-dark">ご住所を検索してください</label>
                                  <div class="d-flex">
                                     <input
                                     type="text"

@@ -17,21 +17,18 @@
       <img src="${contextPath}/resources/images/test.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Python超入門コース 合併版｜Pythonの超基本的な部分をたった1時間で学べます【プログラミング初心者向け入門講座】</h5>
-        <p>Some representative placeholder content for the first slide.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="${contextPath}/resources/images/test2.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>プログラミング言語人気第1位 Pythonでできること5選</h5>
-        <p>Some representative placeholder content for the second slide.</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="${contextPath}/resources/images/maxresdefault.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+        <h5>[왕기초 일본어 독학] 2달 안에 프리토킹 무조건 가능한 현실적 공부법</h5>
       </div>
     </div>
   </div>

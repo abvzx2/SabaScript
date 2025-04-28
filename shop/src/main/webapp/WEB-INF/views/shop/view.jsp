@@ -20,22 +20,6 @@
 
 						
 						<div class="menubox">
-							<div class="menubar">
-								<ul>
-									<li class="active">
-									<button type="button">에피소드</button>
-									</li>
-									<li class="">
-									<button type="button">리뷰(0)</button>
-									</li><li class="">
-									<button type="button">영상소개</button>
-									</li><li class="">
-									<button type="button">상세설명</button>
-									</li>
-								</ul>
-							</div>
-								
-						
 						<!-- 컨텐츠 -->
 						<div class="my-3 content-item">
 							<a href="${view.contents_video_url}">
@@ -45,7 +29,6 @@
 								
 								<div class="info text-white my-3">
 									<p class="content-title subject">${view.contents_title}</p>
-									<span class="date">2020.3.20</span>
 								</div>
 							</a>
 						</div>
@@ -56,22 +39,22 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"></path>
 </svg>
-                찜하기
+                お気に入り
               </button>
 							<script src="/resources/js/cart.js"></script>
 						</div>
 						<div class="text-white">
-							<label class="form-label">카테고리</label>
-							<span class="mx-3">일본어, IT</span>
+							<label class="form-label">カテゴリー</label>
+							<span class="mx-3">${view.cateName}</span>
 						</div>
 						<div class="text-white my-3">
-							<label class="form-label">영상내용</label>
-							<span class="mx-3">파이썬 기초강의(이엘 테그 넣기)</span>
+							<label class="form-label">動画内容</label>
+							<span class="mx-3">${view.contents_description}</span>
 						</div>
 
 						<div id="reply" class="text-white my-3">
 							<c:if test="${member == null}">
-								<p>리뷰를 남기시려면 <a href="/member/signin">로그인</a>해주세요</p>
+								<p>レビューを投稿するには、<a href="/member/signin">ログイン</a>してください</p>
 							</c:if>
 
 							<c:if test="${member != null}"><!-- 로그인을 하면 댓글을 사용 -->
@@ -83,12 +66,12 @@
 										<!-- 댓글쓰기 -->
 										<div class="my-3 text-white">
 											<textarea name="repCon" id="repCon"
-												class="form-control">리뷰를 남겨주세요</textarea>
+												class="form-control">レビューを投稿してください</textarea>
 										</div>
 
 										<div class="d-flex justify-content-end text-white">
 											<button type="button" id="reply_btn" class="btn btn-outline-primary">
-												리뷰쓰기
+												レビュー投稿
 											</button>
 											<script src="/resources/js/reply.js"></script>
 										</div>
@@ -108,15 +91,7 @@
 
 							</section>
 						</div>
-						
-
-						
-
-
-
-
 					</div>
-
 			</div>
 			</div>
 			</div>
@@ -124,19 +99,17 @@
 
 			<!-- 리플리에 수정창 탑재 -->
 			<div class="replyModal">
-
 				<div class="modalContent">
-
 					<div class="">
 						<textarea class="modal_repCon form-control" name="modal_repCon"></textarea>
 					</div>
 
 					<div class="d-flex justify-content-end my-2">
 						<button type="button" class="modal_modify_btn btn btn-success mx-2">
-							수정
+							修正
 						</button>
 						<button type="button" class="modal_cancel btn btn-secondary">
-							취소
+							取り消し
 						</button>
 					</div>
 

@@ -37,8 +37,8 @@
                + "<div class=''><p class='my-3'>" + repDate + "</p></div>"
                +"<c:if test='${member != null}'>"//세션이 있어야만 수정삭제가 가능
                + "<div class='replyFooter my-3'>"
-               + "<button type='button' class='modify btn btn-secondary' data-repNum='"+this.repNum+"'>수정</button>"
-               + "<button type='button' class='delete btn btn-secondary mx-3' data-repNum='"+this.repNum+"'>삭제</button>"
+               + "<button type='button' class='modify btn btn-secondary' data-repNum='"+this.repNum+"'>修正</button>"
+               + "<button type='button' class='delete btn btn-secondary mx-3' data-repNum='"+this.repNum+"'>削除</button>"
                + "</div>"
                +"</c:if>"
                +"</li>";

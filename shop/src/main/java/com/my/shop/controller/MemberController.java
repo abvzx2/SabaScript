@@ -34,8 +34,6 @@ public class MemberController {
 		return new BCryptPasswordEncoder();
 	}
 	
-	
-
 	//개발자 입장에서 페이지를 진입할때 터미널에서 작성해논 메세지가 보임
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
@@ -69,25 +67,42 @@ public class MemberController {
 	public String postSignin(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr)throws Exception{
 		logger.info("post signin");
 		System.out.println("vo : " + vo);
-		
 		MemberVO login = service.signin(vo);//로그인 처리를 위한 서비스 호출
 		//signin(vo)는 사용자 입력값에 맞는 회원 정보를 데이터베이스에서 가져 오는 역활을 합니다
 		HttpSession session = req.getSession();
 //HttpSession 객체를 통해 현재  HTTP세션(사용자마다 고유한 상태정보)을 가져옵니다
 //로그인된 사용자 정보를 세션에 저장하기 위해 사용됩니다.
-boolean passMatch = passEncoder.matches(vo.getUserPass(), login.getUserPass());
+
 //DB의 비밀번호와 입력된 비밀번호를 비교
-System.out.println("login : " + login);
-if(login != null && passMatch) {//아이디가 존재하고(!= null) 비밀번호가 맞으면(PassMatch = true)
-	//맴버세션에 로그인 정보를 부여
-	session.setAttribute("member", login);	
-}else {//아이디가 존재하지 않고 비밀번호가 틀리면
-	session.setAttribute("member", null);
-	rttr.addFlashAttribute("msg", false);//rttr는 리디렉션시에 1회성 데이터를 전달
-	//msg라는 속성에 false를 전달
-	return "redirect:/member/signin";//로그인 화면으로
+
+
+if(login != null) {
+	boolean passMatch = passEncoder.matches(vo.getUserPass(), login.getUserPass());
+	logger.debug("login : {}", login);
+	if(passMatch) {
+		session.setAttribute("member", login);
+        return "redirect:/"; // 로그인 성공
+	}else {
+		logger.warn("비밀번호 불일치: {}", vo.getUserId());
+	    rttr.addFlashAttribute("msg", "비밀번호가 일치하지 않습니다.");
+	    return "redirect:/member/signin";
+	}
+}else {
+	session.setAttribute("member", null); // セッション情報をクリアする
+	logger.warn("존재하지 않는 사용자 ID: {}", vo.getUserId());
+    rttr.addFlashAttribute("msg", "존재하지 않는 ID입니다.");
+    return "redirect:/member/signin";
 }
-return "redirect:/";//로그인 성공시
+
+
+
+//else {//아이디가 존재하지 않고 비밀번호가 틀리면
+////	session.setAttribute("member", null);
+////	rttr.addFlashAttribute("msg", false);//rttr는 리디렉션시에 1회성 데이터를 전달
+//	//msg라는 속성에 false를 전달
+//	return "redirect:/member/signin";//로그인 화면으로
+//}
+
 /*
 postSignin메소드가 호출되면 로그인정보(MemberVO vo), Http요청(HttpServletRequest req) 리디렉션후 추가속성(RedirectAttributes rttr)
 을 파라미터로 받습니다 throws Exception는 예외처리를 메소드 외부로 위임한다는 뜻

@@ -21,7 +21,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void signup(MemberVO vo) throws Exception {
 		sql.insert(namespace + ".signup", vo);
-
 	}
 
 	//로그인
@@ -29,14 +28,4 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberVO signin(MemberVO vo) throws Exception {
 		return sql.selectOne(namespace + ".signin", vo);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

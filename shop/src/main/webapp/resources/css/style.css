@@ -343,4 +343,12 @@ input.userIdIcon {
   border-top-right-radius: 0.375rem;
 }
 
-       
+.card-qna{
+	background-color: #6c757d;
+	color: white;
+}
+.card-qna:hover{
+	transform: scale(1.0);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+}
+

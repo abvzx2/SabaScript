@@ -45,6 +45,7 @@ where g.contents_id = #{contents_id}
 조인을 실행
 군을 설정해서 내비게이션에서 클릭할때 그 군에 상품만 보여줘야 된다
  -->
+ 
 <!-- 댓글시작 -->
 <insert id="registReply">
 <![CDATA[
@@ -202,6 +203,15 @@ select contents_id from tbl_likes where userId = #{userId}
 ]]>
 </select>
 <!-- 좋아요 끝 -->
+
+<!-- QNA 등록 -->
+<insert id="registQna">
+<![CDATA[
+insert into tbl_QNA(qnaNum, contents_category_code, qnaTitle, userId)
+values
+(seq_tbl_QNA.nextval, #{contents_category_code}, #{qnaTitle}, #{userId})
+]]>
+</insert>
 </mapper>
 <!-- 
 

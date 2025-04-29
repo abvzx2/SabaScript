@@ -13,76 +13,67 @@ import com.my.shop.vo.GoodsViewVO;
 import com.my.shop.vo.OrderDetailVO;
 import com.my.shop.vo.OrderListVO;
 import com.my.shop.vo.OrderVO;
+import com.my.shop.vo.QnaVO;
 import com.my.shop.vo.ReplyListVO;
 import com.my.shop.vo.ReplyVO;
 
-@Service//�떎�젣 鍮꾩쫰�땲�뒪 濡쒖쭅�씠 �쓲瑜대뒗怨�
+@Service // 실제 서비스로 등록되는 클래스
 public class ShopServiceImpl implements ShopService {
 
-	@Inject//
-	private ShopDAO dao;
-	
-	@Override//諛쏆� �뜲�씠�꽣瑜� 湲곗��쑝濡� 遺꾨쪟
-	public List<GoodsViewVO> list(int contents_category_code, int level) throws Exception {
-int catecodeRef = 0;//移댄뀒怨좊━ 李몄“ 肄붾뱶
-/*1李� 遺꾨쪟�� 2李⑤텇瑜� 瑜� 留뚯빟 �씠�씪硫�*/	
-if(level == 1) {//1李� 遺꾨쪟
-	catecodeRef = contents_category_code;
-	return dao.list(contents_category_code, catecodeRef);
-}else {//2李� 遺꾨쪟
-	return dao.list(contents_category_code);
-}
+    @Inject // 의존성 주입
+    private ShopDAO dao;
+    
+    @Override // 받은 데이터를 조건에 따라 처리
+    public List<GoodsViewVO> list(int contents_category_code, int level) throws Exception {
+        int catecodeRef = 0; // 콘텐츠 카테고리 참조 코드
+        /* 1차 분류와 2차 분류를 구분해서 처리 */
+        if (level == 1) { // 1차 분류
+            catecodeRef = contents_category_code;
+            return dao.list(contents_category_code, catecodeRef);
+        } else { // 2차 분류
+            return dao.list(contents_category_code);
+        }
+    }
 
-	}
+    @Override // 상품 조회
+    public GoodsViewVO goodsView(int contents_id) throws Exception {
+        return dao.goodsView(contents_id);
+    }
 
+    @Override // 댓글 등록
+    public void registReply(ReplyVO reply) throws Exception {
+        dao.registReply(reply);        
+    }
 
-	@Override//�긽�뭹議고쉶
-	public GoodsViewVO goodsView(int contents_id) throws Exception {
-		return dao.goodsView(contents_id);
-	}
+    @Override // 댓글 리스트
+    public List<ReplyListVO> replyList(int contents_id) throws Exception {
+        return dao.replyList(contents_id);
+    }
 
+    @Override // 댓글 삭제
+    public void deleteReply(ReplyVO reply) throws Exception {
+        dao.deleteReply(reply);        
+    }
 
-	@Override//�뙎湲��벐湲�
-	public void registReply(ReplyVO reply) throws Exception {
-		dao.registReply(reply);		
-	}
+    @Override // 아이디 체크
+    public String idCheck(int repNum) throws Exception {
+        return dao.idCheck(repNum);
+    }
 
+    @Override // 댓글 수정
+    public void modifyReply(ReplyVO reply) throws Exception {
+        dao.modifyReply(reply);        
+    }
 
-	@Override//�뙎湲�由ъ뒪�듃
-	public List<ReplyListVO> replyList(int contents_id) throws Exception {
-		return dao.replyList(contents_id);
-	}
+    @Override // 장바구니 추가
+    public void addCart(CartVO cart) throws Exception {
+        dao.addCart(cart);
+    }
 
-
-	@Override//�뙎湲��궘�젣
-	public void deleteReply(ReplyVO reply) throws Exception {
-		dao.deleteReply(reply);		
-	}
-
-
-	@Override//�븘�씠�뵒 泥댄겕
-	public String idCheck(int repNum) throws Exception {
-		return dao.idCheck(repNum);
-	}
-
-
-	@Override//�뙎湲��닔�젙
-	public void modifyReply(ReplyVO reply) throws Exception {
-		dao.modifyReply(reply);		
-	}
-
-
-	@Override
-	public void addCart(CartVO cart) throws Exception {
-		dao.addCart(cart);
-		
-	}
-
-
-	@Override//移댄듃 由ъ뒪�듃
-	public List<CartListVO> cartList(String userId) throws Exception {
-		return dao.cartList(userId);
-	}
+    @Override // 장바구니 리스트
+    public List<CartListVO> cartList(String userId) throws Exception {
+        return dao.cartList(userId);
+    }
 	
 	// 카트 삭제
 	@Override
@@ -133,6 +124,12 @@ if(level == 1) {//1李� 遺꾨쪟
 			dao.decrementLikes(contents_id);
 			return false;
 		}
+	}
+
+	@Override
+	public void registQna(QnaVO qna) throws Exception {
+		dao.registQna(qna);
+		
 	}
 	
 	

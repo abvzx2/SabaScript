@@ -242,3 +242,16 @@ qna_verify number not null,
 qna_date date default sysdate,
 qna_category VARCHAR2(200) not null,
 qna_answerCheck number not null
+
+
+create table tbl_QNA(
+qnaNum number not null primary key,
+contents_category_code varchar2(100) not null,
+qnaTitle varchar2(500) not null, 
+userId varchar2(100) not null,
+qnaDate date default sysdate,
+constraint cons_fc foreign key(contents_category_code) references tbl_category(contents_category_code) on delete cascade,
+constraint cons_fu foreign key(userId) references tbl_member(userId) on delete cascade
+);
+
+create sequence seq_tbl_QNA;

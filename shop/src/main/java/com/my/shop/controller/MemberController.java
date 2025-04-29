@@ -1,7 +1,9 @@
 package com.my.shop.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,12 +62,22 @@ public class MemberController {
 	}
 	
 	@GetMapping("/signin")// member/signup
-	public void getSignin() throws Exception{
+	public String getSignin(HttpServletRequest request, Model model) throws Exception{
 		logger.info("로그인 진입");
+		
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie c : cookies) {
+				if ("rememberId".equals(c.getName())) {
+					model.addAttribute("rememberId", c.getValue());
+				}
+			}
+		}
+		return "member/signin";
 	}
 	//로그인 post
 	@PostMapping("/signin")
-	public String postSignin(MemberVO vo, HttpServletRequest req, RedirectAttributes rttr)throws Exception{
+	public String postSignin(MemberVO vo, HttpServletRequest req, HttpServletResponse res, RedirectAttributes rttr)throws Exception{
 		logger.info("post signin");
 		System.out.println("vo : " + vo);
 		MemberVO login = service.signin(vo);//로그인 처리를 위한 서비스 호출
@@ -81,6 +94,19 @@ if(login != null) {
 	logger.debug("login : {}", login);
 	if(passMatch) {
 		session.setAttribute("member", login);
+		
+		if("on".equals(req.getParameter("rememberMe"))) {
+			Cookie cookie = new Cookie("rememberId", vo.getUserId());
+			cookie.setPath("/");
+			cookie.setMaxAge(60 * 60 * 24 * 7);
+			res.addCookie(cookie);
+		}else {
+			Cookie cookie = new Cookie("rememberId", null);
+			cookie.setPath("/");
+			cookie.setMaxAge(0);
+			res.addCookie(cookie);
+		}
+		
         return "redirect:/"; // 로그인 성공
 	}else {
 		logger.warn("비밀번호 불일치: {}", vo.getUserId());

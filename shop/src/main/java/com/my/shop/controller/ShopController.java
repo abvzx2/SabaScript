@@ -28,6 +28,7 @@ import com.my.shop.vo.MemberVO;
 import com.my.shop.vo.OrderDetailVO;
 import com.my.shop.vo.OrderListVO;
 import com.my.shop.vo.OrderVO;
+import com.my.shop.vo.QnaVO;
 import com.my.shop.vo.ReplyListVO;
 import com.my.shop.vo.ReplyVO;
 
@@ -39,91 +40,89 @@ public class ShopController {
 	
 	@Inject
 	ShopService service;
-
-
 	
-//	//카테고리蹂� �긽�뭹리스트
-//	@GetMapping("/list")
-//	public void getList(@RequestParam("c") int contents_category_code, @RequestParam("l") int level, Model model)throws Exception{
-//		logger.info("�냼鍮꾩옄 �럹�씠吏� 진입");
-//		List<GoodsViewVO> list = null;
-//		list = service.list(contents_category_code, level);
-//		model.addAttribute("list",list);
-//	}
-//	
-//	//�긽�뭹조회
-//	@GetMapping("/view")
-//	public void getView(@RequestParam("n") int contents_id, Model model) throws Exception{
-//		logger.info("get view");
-//		
-//		GoodsViewVO view = service.goodsView(contents_id);
-//		model.addAttribute("view",view);
-//	}
 	
-	//�뙎湲��벐湲�
-	//酉곕�� �넻�빐 �젋�뜑留� �릺吏� �븡怨� �겢�씪�씠�뼵�듃�뿉寃� 吏곸젒�쟾�떖
+	// 카테고리별 상품 리스트
+	// @GetMapping("/list")
+	// public void getList(@RequestParam("c") int contents_category_code, @RequestParam("l") int level, Model model) throws Exception {
+//	     logger.info("쇼핑몰 페이지 진입");
+//	     List<GoodsViewVO> list = null;
+//	     list = service.list(contents_category_code, level);
+//	     model.addAttribute("list", list);
+	// }
+
+	// 상품 조회
+	// @GetMapping("/view")
+	// public void getView(@RequestParam("n") int contents_id, Model model) throws Exception {
+//	     logger.info("get view");
+
+//	     GoodsViewVO view = service.goodsView(contents_id);
+//	     model.addAttribute("view", view);
+	// }
+
+	// 댓글 등록
+	// Ajax를 통해 전송되며 클라이언트에 바로 전달
 	@ResponseBody
-	@PostMapping(value="/view/registReply")
-	public void registReply(ReplyVO reply, HttpSession session)throws Exception{
-		logger.info("regist reply");
-		//濡쒓렇�씤 �꽭�뀡(�쎒�뿉�꽌 �궗�슜�옄媛� 媛�吏��뒗 uri)
-		MemberVO member = (MemberVO)session.getAttribute("member");
-		reply.setUserId(member.getUserId());
-		//서비스 로직
-		//public void registReply(ReplyVO reply)throws Exception;
-		service.registReply(reply);//湲곗궗�궛�뾽湲곗궗�뿉 �젙�쓽�븯�뒗 愿��젏�뿉�꽌�뒗 �겢�옒�뒪�� �겢�옒�뒪�궗�씠瑜� �뿰寃고븯�뒗 媛�援� �뿭�븷�쓣 �븯�뒗寃�
-		//�옄諛붾쭔�뿉 愿��젏�쑝濡쒕뒗 諛붾뵒媛� �뾾�뒗 援ы쁽泥�  �몢�쓬踰뺤튃 �떒�쐞�뀒�뒪�듃 �넻�빀 �떆�씤
+	@PostMapping(value = "/view/registReply")
+	public void registReply(ReplyVO reply, HttpSession session) throws Exception {
+	    logger.info("regist reply");
+	    // 로그인 세션(서버에서 사용자 정보 가져오는 uri)
+	    MemberVO member = (MemberVO) session.getAttribute("member");
+	    reply.setUserId(member.getUserId());
+	    // 서비스 로직
+	    // public void registReply(ReplyVO reply) throws Exception;
+	    service.registReply(reply); 
+	    // 데이터베이스 트랜잭션 단위에서 클래스와 클래스 사이를 연결하는 역할을 함
+	    // 자바 단위로 보면 트랜잭션이 없지만, 두 번째 타임스탬프 단위 테스트에서 확인
 	}
-//�뙎湲�리스트 로직�뿉�꽌 由ы꽩�쓣 �궗�슜�븯�뒗 3紐� (list,read, 0=�삤瑜�, 1=�꽦怨�, -1=�꽕�듃�썙�겕 �삤瑜�(�겕由ъ뿉�씠�듃�� �뵜由ы듃)
+
+	// 댓글 리스트 로직에서 반환하는 3가지 상태 (list, read, 0=오류, 1=성공, -1=권한없음(클라이언트가 잘못된 요청))
 	@ResponseBody
-	@GetMapping(value="/view/replyList")
-public List<ReplyListVO> getReplyList(@RequestParam("n") int contents_id) throws Exception{
-		logger.info("리플 리스트 진입");
-List<ReplyListVO> reply = service.replyList(contents_id);
-return reply;
+	@GetMapping(value = "/view/replyList")
+	public List<ReplyListVO> getReplyList(@RequestParam("n") int contents_id) throws Exception {
+	    logger.info("리플 리스트 진입");
+	    List<ReplyListVO> reply = service.replyList(contents_id);
+	    return reply;
 	}
-	
-	//�뙎湲��궘�젣 濡쒓렇�씤�븳 �븘�씠�뵒�� �냼媛먯쓣 �옉�꽦�븳 �븘�씠�뵒 鍮꾧탳 �몮�떎�씪移섑븯硫� �궘�젣 洹몃젃吏� �븡�쑝硫� �떎�뙣
+
+	// 댓글 삭제
+	// 로그인한 아이디와 작성한 아이디를 비교해 일치하면 삭제, 그렇지 않으면 실패
 	@ResponseBody
-	@PostMapping(value="/view/deleteReply")
-public int getReplyList(ReplyVO reply, HttpSession session) throws Exception{
-//�젙�긽�옉�룞 �뿬遺�瑜� �솗�씤�븯湲� �쐞�븳 蹂��닔
-int result = 0; 
+	@PostMapping(value = "/view/deleteReply")
+	public int deleteReply(ReplyVO reply, HttpSession session) throws Exception {
+	    int result = 0;
 
-MemberVO member = (MemberVO)session.getAttribute("member");
-//�뙎湲��쓣 �옉�꽦�븳 �궗�슜�옄�쓽 �븘�씠�뵒瑜� 媛��졇�샂
-String userId = service.idCheck(reply.getRepNum()); //�쁽�옱�젒�냽�븳 id vs �뙎湲��쓣 �벖 �븘�씠�뵒
+	    MemberVO member = (MemberVO) session.getAttribute("member");
+	    // 댓글을 작성한 사용자의 아이디를 가져옴
+	    String userId = service.idCheck(reply.getRepNum()); // 현재 로그인한 id vs 댓글 작성자 id
 
-//�븘�씠�뵒 鍮꾧탳
-if(member.getUserId().equals(userId)) {//濡쒓렇�씤�븳 �븘�씠�뵒媛� �옉�꽦�븳 �븘�씠�뵒�� 媛숇떎硫�
-	
-	reply.setUserId(member.getUserId());//reply�뿉 userId���옣
-	service.deleteReply(reply);//서비스 메서드 �떎�뻾
-	
-	result = 1;//�꽦怨�
-}
-//�븯�굹留� oneway ,option
-return result; //�븘�씠�뵒媛� �씪移섑븯硫� �궘�젣 洹몃젃吏� �븡�쑝硫� �븞�궘�젣
+	    // 아이디 검증
+	    if (member.getUserId().equals(userId)) { // 로그인한 아이디가 작성자 아이디와 같다면
+	        reply.setUserId(member.getUserId()); // reply에 userId 저장
+	        service.deleteReply(reply); // 서비스 메서드 실행
+	        result = 1; // 성공
+	    }
+	    // oneway, option 둘 다 처리
+	    return result; // 아이디가 다르면 삭제 실패
 	}
-	
-	//�븘�씠�뵒 泥댄겕
-//�뙎湲��닔�젙
+
+	// 아이디 체크
+	// 댓글 수정
 	@ResponseBody
-	@PostMapping(value="/view/modifyReply")	
-public int modifyReply(ReplyVO reply, HttpSession session)throws Exception{
+	@PostMapping(value = "/view/modifyReply")
+	public int modifyReply(ReplyVO reply, HttpSession session) throws Exception {
+	    int result = 0;
+	    MemberVO member = (MemberVO) session.getAttribute("member");
+	    String userId = service.idCheck(reply.getRepNum());
 
-int result = 0;
-MemberVO member = (MemberVO)session.getAttribute("member");
-String userId = service.idCheck(reply.getRepNum());
-
-if(member.getUserId().equals(userId)) {//濡쒓렇�씤�븳 �븘�씠�뵒媛� �옉�꽦�븳 �븘�씠�뵒�� 媛숇떎硫�
-	
-	reply.setUserId(member.getUserId());//reply�뿉 userId���옣
-	service.modifyReply(reply);//서비스 메서드 �떎�뻾	
-	result = 1;//�꽦怨�
-}
-return result;		
+	    if (member.getUserId().equals(userId)) { // 로그인한 아이디가 작성자 아이디와 같다면
+	        reply.setUserId(member.getUserId()); // reply에 userId 저장
+	        service.modifyReply(reply); // 서비스 메서드 실행
+	        result = 1; // 성공
+	    }
+	    return result;
 	}
+
 	
 	//카트 추가 RDBMS ORM
 	@ResponseBody
@@ -308,11 +307,31 @@ model.addAttribute("orderView", orderView);
 		// QnA
 		@GetMapping("/QnAList")
 		public void getQnAList() throws Exception{
-			logger.info("QnA 화면 진입");
+			logger.info("QnA 리스트 화면 진입");
 		}
 	
-	
-	
+		// QnA
+				@GetMapping("/QnA")
+				public void getQnA() throws Exception{
+					logger.info("QnA 등록 화면 진입");
+				}
+		
+		
+	//QnA 등록
+		@ResponseBody
+		@PostMapping(value = "/view/registQna")
+		public void registQna(QnaVO qna, HttpSession session) throws Exception {
+		    logger.info("regist QnA");
+		    // 로그인 세션(서버에서 사용자 정보 가져오는 uri)
+		    MemberVO member = (MemberVO) session.getAttribute("member");
+		    qna.setUserId(member.getUserId());
+		    // 서비스 로직
+		    // public void registReply(ReplyVO reply) throws Exception;
+		    service.registQna(qna); 
+		    // 데이터베이스 트랜잭션 단위에서 클래스와 클래스 사이를 연결하는 역할을 함
+		    // 자바 단위로 보면 트랜잭션이 없지만, 두 번째 타임스탬프 단위 테스트에서 확인
+		}
+
 	
 	
 	
